@@ -14,7 +14,6 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::all();
-        dd($clients);
         return view('client.index',compact('clients'));
     }
 
@@ -83,19 +82,7 @@ class ClientController extends Controller
             'reference_titre' => ['nullable']
         ]);
 
-        /*$client = Client->update([
-            'designation' => $request->designation,
-            'delegation' => $request->delegation,
-            'code_postal' => $request->code_postal,
-            'adresse' => $request->adresse,
-            'phone' => $request->phone,
-            'secondary_phone' => $request->secondary_phone,
-            'compte_auxilliaire' => $request->compte_auxilliaire,
-            'categorie' => $request->categorie,
-            'website' => $request->website,
-            'scan_titre' => $request->scan_titre,
-            'reference_titre' => $request->reference_titre,
-        ]);*/
+
 
     }
 }
