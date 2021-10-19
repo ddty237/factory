@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -42,7 +43,7 @@ class ProductController extends Controller
         ]);
 
         $product->save();
-        return back();
+        return redirect('client')->with('message','Votre produit a été enregistré avec succès');
     }
 
     public function show()

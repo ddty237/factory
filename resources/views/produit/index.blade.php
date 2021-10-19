@@ -13,7 +13,6 @@
             </div>
         </div>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-auto shadow-sm sm:rounded-lg">
@@ -22,7 +21,6 @@
                         <p class="text-2xl text-center mt-4 mb-4">
                             Reporting des clients
                         </p>
-
                         <table class="min-w-full overflow-visible divide-y divide-gray-200 border mr-3">
                             <thead>
                                     <th class="px-6 py-3 bg-gray-50">

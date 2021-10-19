@@ -21,9 +21,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('matricule')->unique();
-            $table->string('direction');
-            $table->string('poste');
-            $table->integer('phone_number');
+            $table->string('direction_id');
+            $table->string('poste_id');
+            $table->integer('phone_number')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

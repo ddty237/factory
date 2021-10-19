@@ -27,14 +27,14 @@ class ClientController extends Controller
     {
         $request->validate([
             'designation' => ['required'],
-            'delegation' => ['nullable'],
+            'delegation' => ['required'],
             'code_postal' => ['nullable'],
             'adresse' => ['nullable'],
-            'phone' => ['nullable'],
+            'phone' => ['required'],
             'compte_auxilliaire' => ['nullable'],
             'categorie' => ['nullable'],
             'scan_titre' => ['nullable'],
-            'reference_titre' => ['nullable']
+            'reference_titre' => ['required']
         ]);
 
         $client = Client::create([
@@ -64,6 +64,36 @@ class ClientController extends Controller
 
     public function edit()
     {
+        return view('client.edit');
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'designation' => ['required'],
+            'delegation' => ['nullable'],
+            'code_postal' => ['nullable'],
+            'adresse' => ['nullable'],
+            'phone' => ['nullable'],
+            'compte_auxilliaire' => ['nullable'],
+            'categorie' => ['nullable'],
+            'scan_titre' => ['nullable'],
+            'reference_titre' => ['nullable']
+        ]);
+
+        /*$client = Client->update([
+            'designation' => $request->designation,
+            'delegation' => $request->delegation,
+            'code_postal' => $request->code_postal,
+            'adresse' => $request->adresse,
+            'phone' => $request->phone,
+            'secondary_phone' => $request->secondary_phone,
+            'compte_auxilliaire' => $request->compte_auxilliaire,
+            'categorie' => $request->categorie,
+            'website' => $request->website,
+            'scan_titre' => $request->scan_titre,
+            'reference_titre' => $request->reference_titre,
+        ]);*/
 
     }
 }

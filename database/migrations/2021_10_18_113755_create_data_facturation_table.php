@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductTable extends Migration
+class CreateDataFacturationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('data_facturation', function (Blueprint $table) {
             $table->id();
-            $table->string('designation');
-            $table->string('description');
-            $table->string('codification');
-            $table->string('compte_collectif');
-            $table->string('direction_id');
-            $table->bigInteger('montant')->nullable();
+            $table->bigInteger('client_id');
+            $table->bigInteger('product_id');
+            $table->string('observation_general');
+            $table->string('observation_relative');
+            $table->bigInteger('montant_facture');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('data_facturation');
     }
 }

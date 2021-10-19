@@ -22,4 +22,14 @@ class Client extends Model
     ];
 
     protected $guarded = [];
+
+    public function delegation()
+    {
+        return $this->hasOne(Delegation::class);
+    }
+
+    public function categorie()
+    {
+        return $this->hasOne(Categorie::class);
+    }
 }
