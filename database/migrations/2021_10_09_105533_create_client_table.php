@@ -16,7 +16,7 @@ class CreateClientTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('designation');
-            $table->string('delegation_id');
+            $table->bigInteger('delegation_id');
             $table->string('ville')->nullable();
             $table->string('code_postal');
             $table->float('lat',11,8)->change();
@@ -28,7 +28,7 @@ class CreateClientTable extends Migration
             $table->string('reference_titre')->unique();
             $table->string('email')->nullable();
             $table->string('compte_auxilliaire');
-            $table->string('categorie_id');
+            $table->bigInteger('categorie_id');
             $table->string('scan_titre');
             $table->timestamps();
         });

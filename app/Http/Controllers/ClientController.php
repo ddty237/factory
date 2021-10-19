@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\Client;
+use App\Models\Delegation;
 use Illuminate\Http\Request;
 
 use function PHPSTORM_META\map;
@@ -12,15 +14,15 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::all();
-
-        $headers = collect($clients->toArray()[0])->keys();
-
-        return view('client.index',compact('clients','headers'));
+        dd($clients);
+        return view('client.index',compact('clients'));
     }
 
     public function create()
     {
-        return view('client.create');
+        $categories = Categorie::all();
+        $delegations = Delegation::all();
+        return view('client.create',compact('categories','delegations'));
     }
 
     public function store(Request $request)
@@ -32,20 +34,20 @@ class ClientController extends Controller
             'adresse' => ['nullable'],
             'phone' => ['required'],
             'compte_auxilliaire' => ['nullable'],
-            'categorie' => ['nullable'],
+            'categorie' => ['required'],
             'scan_titre' => ['nullable'],
             'reference_titre' => ['required']
         ]);
 
         $client = Client::create([
             'designation' => $request->designation,
-            'delegation' => $request->delegation,
+            'delegation_id' => $request->delegation,
             'code_postal' => $request->code_postal,
             'adresse' => $request->adresse,
             'phone' => $request->phone,
             'secondary_phone' => $request->secondary_phone,
             'compte_auxilliaire' => $request->compte_auxilliaire,
-            'categorie' => $request->categorie,
+            'categorie_id' => $request->categorie,
             'website' => $request->website,
             'scan_titre' => $request->scan_titre,
             'reference_titre' => $request->reference_titre,

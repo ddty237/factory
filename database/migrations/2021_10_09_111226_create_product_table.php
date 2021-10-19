@@ -19,7 +19,7 @@ class CreateProductTable extends Migration
             $table->string('description');
             $table->string('codification');
             $table->string('compte_collectif');
-            $table->string('direction_id');
+            $table->bigInteger('direction_id');
             $table->bigInteger('montant')->nullable();
             $table->timestamps();
         });

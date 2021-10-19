@@ -33,10 +33,14 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="mt-4 px-20">
+                            <div class="px-20 mt-4">
                                 <x-label for="delegation" :value="__('Delegation')" />
-                                <x-input id="delegation" class="block mt-1 w-full{{ $errors->has('delegation') ? ' border-red-500' : '' }}" type="text" name="delegation" :value="old('delegation')" placeholder="champs requis"/>
-                                @error('delegation')
+                                <select class="rounded-md shadow-sm w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="delegation">
+                                  @foreach ($delegations as $delegation)
+                                      <option value={{$delegation->id}}>{{$delegation->name}}</option>
+                                  @endforeach
+                                </select>
+                                @error('categorie')
                                     <div class="mt-1 font-semibold text-red-500">
                                         Ce champs est réquis.
                                     </div>
@@ -108,26 +112,18 @@
                                 <x-label for="compte_auxilliaire" :value="__('Compte auxilliaire')" />
                                 <x-input id="compte_auxilliaire" class="block mt-1 w-full" type="text" name="compte_auxilliaire" :value="old('compte_auxilliaire')" />
                             </div>
-                            <div class="mt-4 px-20">
+                            <div class="px-20 mt-4">
                                 <x-label for="categorie" :value="__('Categorie')" />
-                                <x-input id="categorie" class="block mt-1 w-full{{ $errors->has('categorie') ? ' border-red-500' : '' }}" type="text" name="categorie" :value="old('categorie')" placeholder="champs requis"/>
+                                <select class="rounded-md shadow-sm w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="categorie">
+                                  @foreach ($categories as $categorie)
+                                      <option value={{$categorie->id}}>{{$categorie->name}}</option>
+                                  @endforeach
+                                </select>
                                 @error('categorie')
                                     <div class="mt-1 font-semibold text-red-500">
                                         Ce champs est réquis.
                                     </div>
                                 @enderror
-                            </div>
-                            <div class="px-20 mt-4">
-                                <x-label for="categorie" :value="__('Categorie')" />
-                                <select class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                  @foreach ($categories as $categorie)
-                                      <option value="">{{}}</option>
-                                  @endforeach
-                                  <option>Direction general</option>
-                                  <option>$5,000</option>
-                                  <option>$10,000</option>
-                                  <option>$25,000</option>
-                                </select>
                             </div>
                             <div class="mt-4 px-20">
                                 <x-label for="scan_titre" :value="__('Scan titre')" />

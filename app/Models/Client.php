@@ -11,12 +11,12 @@ class Client extends Model
 
     protected $fillable = [
         'designation',
-        'delegation',
+        'delegation_id',
         'code_postal',
         'adresse',
         'phone',
         'compte_auxilliaire',
-        'categorie',
+        'categorie_id',
         'scan_titre',
         'reference_titre',
     ];

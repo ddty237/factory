@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Direction;
+use App\Models\Poste;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -20,7 +22,9 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $postes = Poste::all();
+        $directions = Direction::all();
+        return view('auth.register',compact('postes','directions'));
     }
 
     /**
@@ -36,8 +40,8 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'integer'],
-            'direction' => ['required', 'string', 'max:255'],
-            'poste' => ['required', 'string', 'max:255'],
+            'direction' => ['required', 'integer', 'max:255'],
+            'poste' => ['required', 'integer', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'matricule' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
@@ -49,8 +53,8 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'prenom' => $request->prenom,
             'phone_number' => $request->phone_number,
-            'direction' => $request->direction,
-            'poste' => $request->poste,
+            'direction_id' => $request->direction,
+            'poste_id' => $request->poste,
             'matricule' => $request->matricule
         ]);
 

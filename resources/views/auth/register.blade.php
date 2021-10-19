@@ -44,15 +44,31 @@
                 <!-- Direction -->
                 <div class="mt-4">
                     <x-label for="direction" :value="__('Direction')" />
-
-                    <x-input id="direction" class="block mt-1 w-full" type="text" name="direction" :value="old('direction')" required autofocus />
+                    <select class="rounded-md shadow-sm w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="direction">
+                      @foreach ($directions as $direction)
+                          <option value={{$direction->id}}>{{$direction->name}}</option>
+                      @endforeach
+                    </select>
+                    @error('direction')
+                        <div class="mt-1 font-semibold text-red-500">
+                            Ce champs est réquis.
+                        </div>
+                    @enderror
                 </div>
 
                 <!-- Poste -->
                 <div class="mt-4">
                     <x-label for="poste" :value="__('Poste')" />
-
-                    <x-input id="poste" class="block mt-1 w-full" type="text" name="poste" :value="old('poste')" required autofocus />
+                    <select class="rounded-md shadow-sm w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="poste">
+                      @foreach ($postes as $poste)
+                          <option value={{$poste->id}}>{{$poste->name}}</option>
+                      @endforeach
+                    </select>
+                    @error('poste')
+                        <div class="mt-1 font-semibold text-red-500">
+                            Ce champs est réquis.
+                        </div>
+                    @enderror
                 </div>
 
                 <!-- Email Address -->

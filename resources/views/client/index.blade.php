@@ -45,10 +45,10 @@
                                             {{ $client->designation }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
-                                            {{ $client->delegation }}
+                                            {{ $client->delegation()->name }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
-                                            {{ $client->categorie }}
+                                            {{ $client->categorie()->name }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
                                             {{ $client->reference_titre }}

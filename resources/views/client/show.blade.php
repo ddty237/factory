@@ -19,7 +19,7 @@
                             </div>
                             <div class="px-20 mt-4">
                                 <div class="block font-semibold uppercase text-xl text-gray-700">Delegation</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->delegation}}</div>
+                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->delegation()->name}}</div>
                             </div>
                             <div class="px-20 mt-4">
                                 <div class="block font-semibold uppercase text-xl text-gray-700">Ville</div>
@@ -59,7 +59,7 @@
                             </div>
                             <div class="px-20 mt-4">
                                 <div class="block font-semibold uppercase text-xl text-gray-700">Categotie</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->categorie}}</div>
+                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->categorie()->name}}</div>
                             </div>
                             <div class="px-20 mt-4">
                                 <div class="block font-semibold uppercase text-xl text-gray-700">Scan contrat</div>

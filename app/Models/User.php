@@ -24,8 +24,8 @@ class User extends Authenticatable
         'password',
         'phone_number',
         'prenom',
-        'poste',
-        'direction',
+        'poste_id',
+        'direction_id',
         'matricule'
     ];
 
