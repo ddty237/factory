@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Categorie;
+use App\Models\Delegation;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Client extends Model
 {
@@ -23,13 +25,13 @@ class Client extends Model
 
     protected $guarded = [];
 
-    public function delegation()
-    {
-        return $this->hasOne(Delegation::class);
-    }
-
     public function categorie()
     {
-        return $this->hasOne(Categorie::class);
+        return $this->belongsTo(Categorie::class);
+    }
+
+    public function delegation()
+    {
+        return $this->belongsTo(Delegation::class);
     }
 }

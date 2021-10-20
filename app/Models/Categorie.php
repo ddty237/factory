@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\User;
+
+use App\Models\Client;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -13,8 +14,8 @@ class Categorie extends Model
 
     protected $guarded = [];
 
-    public function user()
+    public function clients()
     {
-        return $this->hasOne(User::class);
+        return $this->hasMany(Client::class);
     }
 }

@@ -29,7 +29,7 @@
                                         <span class="text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Designation</span>
                                     </th>
                                     <th class="px-6 py-3 bg-gray-50">
-                                        <span class="text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">delagation</span>
+                                        <span class="text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">delegation</span>
                                     </th>
                                     <th class="px-6 py-3 bg-gray-50">
                                         <span class="text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">categorie</span>
@@ -45,10 +45,10 @@
                                             {{ $client->designation }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
-                                            {{ $client->delegation()->name }}
+                                            {{ $client->delegation->name }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
-                                            {{ $client->categorie()->name }}
+                                            {{ $client->categorie->name }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
                                             {{ $client->reference_titre }}

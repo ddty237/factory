@@ -11,8 +11,8 @@ class Delegation extends Model
     protected $table = "delegations";
     use HasFactory;
 
-    public function user()
+    public function clients()
     {
-        return $this->hasOne(User::class);
+        return $this->hasMany(Client::class);
     }
 }
