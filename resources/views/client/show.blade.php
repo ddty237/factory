@@ -67,7 +67,9 @@
                             </div>
                             <div class="flex items-center justify-end mt-4 px-20 mb-6">
                                 <x-button class="ml-4">
-                                    {{ __('Modifier le client') }}
+                                    <a href="{{ route('client.edit',['client' => $client->id]) }}">
+                                        {{ __('Modifier le client') }}
+                                    </a>
                                 </x-button>
                             </div>
                     </div>

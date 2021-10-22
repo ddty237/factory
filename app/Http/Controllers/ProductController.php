@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Direction;
 use App\Models\Product;
-use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -17,7 +17,8 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('produit.create');
+        $directions = Direction::all();
+        return view('produit.create',compact('directions'));
     }
 
     public function store(Request $request)
@@ -36,23 +37,22 @@ class ProductController extends Controller
             'description' => $request->description,
             'compte_collectif' => $request->compte_collectif,
             'codification' => $request->codification,
-            'direction' => $request->direction,
-            'montant' => $request->montant,
-            'sub_categorie' => 'une categorie'
-
+            'direction_id' => $request->direction,
+            'montant' => $request->montant
         ]);
 
         $product->save();
-        return redirect('client')->with('message','Votre produit a été enregistré avec succès');
+        return redirect('produit')->with('message','Votre produit a été enregistré avec succès');
     }
 
-    public function show()
+    public function show(Product $product)
     {
-        return view('produit.show');
+        $product = $product;
+        return view('produit.show', compact('product'));
     }
 
     public function edit()
     {
-
+        return view('produit.edit');
     }
 }

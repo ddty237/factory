@@ -62,9 +62,11 @@ class ClientController extends Controller
         return view('client.show',compact('client'));
     }
 
-    public function edit()
+    public function edit(Client $client)
     {
-        return view('client.edit');
+        $categories = Categorie::all();
+        $delegations = Delegation::all();
+        return view('client.edit',compact('client','categories','delegations'));
     }
 
     public function update(Request $request)
@@ -80,8 +82,5 @@ class ClientController extends Controller
             'scan_titre' => ['nullable'],
             'reference_titre' => ['nullable']
         ]);
-
-
-
     }
 }

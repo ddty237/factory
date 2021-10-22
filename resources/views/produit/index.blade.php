@@ -17,9 +17,9 @@
         <div class="max-w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-auto shadow-sm sm:rounded-lg">
                     <div class=" bg-white border-gray-200 px-3 pt-16 pb-6">
-                        <h1 class="uppercase text-center tracking-wider text-gray-800 text-4xl font-semibold">Module Client</h1>
+                        <h1 class="uppercase text-center tracking-wider text-gray-800 text-4xl font-semibold">Module Produit</h1>
                         <p class="text-2xl text-center mt-4 mb-4">
-                            Reporting des clients
+                            Reporting des produits
                         </p>
                         <table class="min-w-full overflow-visible divide-y divide-gray-200 border mr-3">
                             <thead>
@@ -46,7 +46,7 @@
                                             {{ $product->codification }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
-                                            {{ $product->direction }}
+                                            {{ $product->direction->name }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
                                             {{ $product->montant }}

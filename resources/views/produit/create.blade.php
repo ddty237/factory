@@ -18,7 +18,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class=" bg-white border-gray-200 px-3 pt-16 pb-6">
-                        <h1 class="uppercase text-center tracking-wider text-gray-800 text-4xl font-semibold">Module Client</h1>
+                        <h1 class="uppercase text-center tracking-wider text-gray-800 text-4xl font-semibold">Module Produit</h1>
                         <p class="text-2xl text-center mt-4">
                             Creation d'un produit
                         </p>
@@ -40,9 +40,18 @@
                                 <x-label for="codification" :value="__('Codification')" />
                                 <x-input id="codification" class="block mt-1 w-full" type="text" name="codification" :value="old('codification')" />
                             </div>
-                            <div class="mt-4 px-20">
+                            <div class="px-20 mt-4">
                                 <x-label for="direction" :value="__('Direction')" />
-                                <x-input id="direction" class="block mt-1 w-full" type="text" name="direction" :value="old('direction')" />
+                                <select class="rounded-md shadow-sm w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="direction">
+                                  @foreach ($directions as $direction)
+                                      <option value={{$direction->id}}>{{$direction->name}}</option>
+                                  @endforeach
+                                </select>
+                                @error('direction')
+                                    <div class="mt-1 font-semibold text-red-500">
+                                        Ce champs est réquis.
+                                    </div>
+                                @enderror
                             </div>
                             <div class="mt-4 px-20">
                                 <x-label for="montant" :value="__('Montant')" />
@@ -56,7 +65,6 @@
                             </div>
                         </form>
                     </div>
-
             </div>
         </div>
     </div>

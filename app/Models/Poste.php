@@ -13,4 +13,8 @@ class Poste extends Model
 
     protected $guarded = [];
 
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

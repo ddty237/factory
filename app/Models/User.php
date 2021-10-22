@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Poste;
 use App\Models\Direction;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -50,11 +51,11 @@ class User extends Authenticatable
 
     public function direction()
     {
-        return $this->hasOne(Direction::class);
+        return $this->belongsTo(Direction::class);
     }
 
     public function poste()
     {
-        return $this->hasOne(Poste::class);
+        return $this->belongsTo(Poste::class);
     }
 }
