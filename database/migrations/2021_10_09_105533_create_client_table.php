@@ -18,18 +18,18 @@ class CreateClientTable extends Migration
             $table->string('designation');
             $table->bigInteger('delegation_id');
             $table->string('ville')->nullable();
-            $table->string('code_postal');
-            $table->float('lat',11,8)->change();
-            $table->float('lng',11,8)->change();
-            $table->string('adresse');
+            $table->string('code_postal')->nullable();
+            $table->float('lat')->nullable();
+            $table->float('lng')->nullable();
+            $table->string('adresse')->nullable();
             $table->integer('phone');
             $table->integer('secondary_phone')->nullable();
             $table->string('website')->nullable();
             $table->string('reference_titre')->unique();
             $table->string('email')->nullable();
-            $table->string('compte_auxilliaire');
+            $table->string('compte_auxilliaire')->nullable();
             $table->bigInteger('categorie_id');
-            $table->string('scan_titre');
+            $table->string('scan_titre')->nullable();
             $table->timestamps();
         });
     }

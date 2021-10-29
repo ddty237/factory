@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categorie;
 use App\Models\Client;
+use App\Models\Categorie;
 use App\Models\Delegation;
 use Illuminate\Http\Request;
 
 use function PHPSTORM_META\map;
+use Illuminate\Support\Facades\Storage;
 
 class ClientController extends Controller
 {
@@ -29,16 +30,17 @@ class ClientController extends Controller
         $request->validate([
             'designation' => ['required'],
             'delegation' => ['required'],
-            'code_postal' => ['nullable'],
-            'adresse' => ['nullable'],
-            'phone' => ['required'],
-            'compte_auxilliaire' => ['nullable'],
             'categorie' => ['required'],
-            'scan_titre' => ['nullable'],
-            'reference_titre' => ['required']
+            'phone' => ['required','numeric'],
+            'reference_titre' => ['unique']
         ]);
 
-        $client = Client::create([
+        $DirName = 'titreClient';
+        $file = $request->file('scan_titre');
+        $fileDetails = $request->scan_titre;
+        $fileName = $this->imageStorage($DirName,$file,$fileDetails);
+
+        Client::create([
             'designation' => $request->designation,
             'delegation_id' => $request->delegation,
             'code_postal' => $request->code_postal,
@@ -48,12 +50,11 @@ class ClientController extends Controller
             'compte_auxilliaire' => $request->compte_auxilliaire,
             'categorie_id' => $request->categorie,
             'website' => $request->website,
-            'scan_titre' => $request->scan_titre,
+            'scan_titre' => $fileName,
             'reference_titre' => $request->reference_titre,
         ]);
 
-        $client->save();
-        return back();
+        return redirect('client')->with('message','Votre client a été enregistré avec succès.');
     }
 
     public function show(Client $client)
@@ -69,18 +70,46 @@ class ClientController extends Controller
         return view('client.edit',compact('client','categories','delegations'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Client $client)
     {
-        $request->validate([
-            'designation' => ['required'],
-            'delegation' => ['nullable'],
-            'code_postal' => ['nullable'],
-            'adresse' => ['nullable'],
-            'phone' => ['nullable'],
-            'compte_auxilliaire' => ['nullable'],
-            'categorie' => ['nullable'],
-            'scan_titre' => ['nullable'],
-            'reference_titre' => ['nullable']
+        Storage::delete([$client->scan_titre, '']);
+
+        $DirName = 'titreClient';
+        $file = $request->file('scan_titre');
+        $fileDetails = $request->scan_titre;
+        $fileName = $this->imageStorage($DirName,$file,$fileDetails);
+
+        $client = Client::where('id',$client->id)->update([
+            'designation' => $request->designation,
+            'delegation_id' => $request->delegation,
+            'code_postal' => $request->code_postal,
+            'adresse' => $request->adresse,
+            'phone' => $request->phone,
+            'secondary_phone' => $request->secondary_phone,
+            'compte_auxilliaire' => $request->compte_auxilliaire,
+            'categorie_id' => $request->categorie,
+            'website' => $request->website,
+            'scan_titre' => $fileName,
+            'reference_titre' => $request->reference_titre,
         ]);
+
+        return redirect('client');
     }
+
+    public function imageStorage($dirName, $file, $fileDetails)
+    {
+        if(is_file($file)){
+            $DirPath = 'public/' . $dirName;
+            if (!Storage::exists($DirPath)) {
+                Storage::makeDirectory($DirPath);
+            }
+            $imageName = time() . '.' . $fileDetails->extension();
+            $path = $file->storeAs($DirPath, $imageName);
+            return $path;
+        }else{
+            return NULL;
+        }
+
+    }
+
 }

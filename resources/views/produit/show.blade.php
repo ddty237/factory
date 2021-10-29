@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Reporting des produits') }}
+                {{ __('Prévisualisation des produits/sous-produits') }}
             </h2>
             <div class="flex items-center justify-end px-20">
                 <x-button class="ml-4">
@@ -13,13 +13,46 @@
             </div>
         </div>
     </x-slot>
-
-    <div class="flex justify-center items-center mt-3">
-        <div class="bg-green-100 p-5 w-full sm:w-1/2 rounded">
-            <div class="flex justify-between">
-            <div class="flex space-x-3">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="flex-none fill-current text-green-500 h-8 w-8">
-                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 16.518l-4.5-4.319 1.396-1.435 3.078 2.937 6.105-6.218 1.421 1.409-7.5 7.626z" /></svg>
-                <div class="flex-1 mt-0.5 text-xl text-green-700 font-medium">Show product and test this controller</div>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="container bg-white border-gray-200 px-4 pt-16 pb-6">
+                        <p class="text-2xl text-center mt-4 mb-4">
+                            {{$produit->designation}}
+                        </p>
+                            <div class="px-20">
+                                <div class="block font-semibold uppercase text-xl text-gray-700">Designation</div>
+                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$produit->designation}}</div>
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="block font-semibold uppercase text-xl text-gray-700">Description</div>
+                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$produit->description}}</div>
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="block font-semibold uppercase text-xl text-gray-700">Codification budgétaire</div>
+                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$produit->codification}}</div>
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="block font-semibold uppercase text-xl text-gray-700">Compte collectif</div>
+                                <div class="block leading-4 text-normal text-lg text-gray-7900">{{$produit->compte_collectif}}</div>
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="block font-semibold uppercase text-xl text-gray-700">Direction rattaché</div>
+                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$produit->direction->name}}</div>
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="block font-semibold uppercase text-xl text-gray-700">Montant</div>
+                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$produit->montant}}</div>
+                            </div>
+                            <div class="flex items-center justify-end mt-4 px-20 mb-6">
+                                <x-button class="ml-4">
+                                    <a href="{{ route('produit.edit',['produit' => $produit->id]) }}">
+                                        {{ __('Modifier le produit') }}
+                                    </a>
+                                </x-button>
+                            </div>
+                    </div>
+            </div>
+        </div>
     </div>
 </x-app-layout>

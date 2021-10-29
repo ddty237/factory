@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\BillingDataController;
 use App\Http\Controllers\Client;
 use Illuminate\Routing\RouteUri;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SubProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,5 +39,10 @@ Route::get('/accueil', function() {
 Route::resource('client', ClientController::class);
 //product
 Route::resource('produit',ProductController::class);
+//subProduct
+Route::get('subProduct/create',[SubProductController::class,'create'])->name('subProduct.create');
+Route::post('subProduct/store',[SubProductController::class,'store'])->name('subProduct.store');
+//Billing data
+Route::resource('billingData',BillingDataController::class);
 
 require __DIR__.'/auth.php';

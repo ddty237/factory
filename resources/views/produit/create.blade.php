@@ -37,7 +37,7 @@
                                 <x-input id="compte_collectif" class="block mt-1 w-full" type="text" name="compte_collectif" :value="old('compte_collectif')" />
                             </div>
                             <div class="mt-4 px-20">
-                                <x-label for="codification" :value="__('Codification')" />
+                                <x-label for="codification" :value="__('Codification Budgétaire')" />
                                 <x-input id="codification" class="block mt-1 w-full" type="text" name="codification" :value="old('codification')" />
                             </div>
                             <div class="px-20 mt-4">
@@ -53,6 +53,13 @@
                                     </div>
                                 @enderror
                             </div>
+                            <div class="px-20 mt-4">
+                                <label for="remember_me" class="inline-flex items-center">
+                                    <input id="haveCategorie" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="haveCategorie" onclick="isChecked()"/>
+                                    <span class="ml-2 text-sm text-gray-600">{{ __('Admet une sous-produit') }}</span>
+                                </label>
+                            </div>
+
                             <div class="mt-4 px-20">
                                 <x-label for="montant" :value="__('Montant')" />
                                 <x-input id="montant" class="block mt-1 w-full" type="text" name="montant" :value="old('montant')" />
@@ -69,3 +76,22 @@
         </div>
     </div>
 </x-app-layout>
+<script>
+
+        console.log('ok');
+        categorie = document.getElementById('haveCategorie').checked;
+        montant = document.getElementById('montant');
+
+        function isChecked() {
+            categorie = !categorie;
+
+            if(categorie) {
+                montant.disabled = true;
+            }else{
+                montant.disabled = false;
+            }
+        }
+
+
+
+</script>

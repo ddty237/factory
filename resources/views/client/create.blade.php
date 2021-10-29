@@ -22,7 +22,7 @@
                         <p class="text-2xl text-center mt-4">
                             Creation d'un client
                         </p>
-                        <form method="POST" action="{{ route('client.store') }}">
+                        <form method="POST" action="{{ route('client.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="px-20">
                                 <x-label for="designation" :value="__('Designation')" />
@@ -95,7 +95,7 @@
                                 <x-input id="reference_titre" class="block mt-1 w-full{{ $errors->has('reference_titre') ? ' border-red-500' : '' }}" type="text" name="reference_titre" :value="old('reference_titre')" placeholder="champs requis"/>
                                 @error('reference_titre')
                                     <div class="mt-1 font-semibold text-red-500">
-                                        Ce champs est réquis.
+                                        {{$errors->first('reference_titre')}}
                                     </div>
                                 @enderror
                             </div>
@@ -125,11 +125,12 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="mt-4 px-20">
+                            <div class="px-20 mt-4">
                                 <x-label for="scan_titre" :value="__('Scan titre')" />
-                                <x-input id="scan_titre" class="block mt-1 w-full" type="text" name="scan_titre" :value="old('scan_titre')" />
+                                <input class="px-4 py-4 rounded-lg border-dashed border-2 border-gray-200 bg-white h-full w-full" type="file" name="scan_titre">
+                                <div class="flex justify-between items-center text-gray-400"> <span>Accepted file type:.doc only</span> <span class="flex items-center "><i class="fa fa-lock mr-1"></i> secure</span> </div>
                             </div>
-                            </div>
+
                             <div class="flex items-center justify-end mt-4 px-20 mb-6">
                                 <x-button class="ml-4">
                                     {{ __('Enregistrer le client') }}

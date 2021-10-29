@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Direction;
 use App\Models\Product;
+use App\Models\SubProduct;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -11,8 +12,9 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+        $subproducts = SubProduct::all();
 
-        return view('produit.index',compact('products'));
+        return view('produit.index',compact('products','subproducts'));
     }
 
     public function create()
@@ -32,7 +34,7 @@ class ProductController extends Controller
             'montant' => ['nullable']
         ]);
 
-        $product = Product::create([
+        Product::create([
             'designation' => $request->designation,
             'description' => $request->description,
             'compte_collectif' => $request->compte_collectif,
@@ -41,14 +43,13 @@ class ProductController extends Controller
             'montant' => $request->montant
         ]);
 
-        $product->save();
         return redirect('produit')->with('message','Votre produit a été enregistré avec succès');
     }
 
-    public function show(Product $product)
+    public function show(Product $produit)
     {
-        $product = $product;
-        return view('produit.show', compact('product'));
+        $produit = $produit;
+        return view('produit.show', compact('produit'));
     }
 
     public function edit()

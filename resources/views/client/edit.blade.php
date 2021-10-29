@@ -6,7 +6,7 @@
             </h2>
             <div class="flex items-center justify-end px-20">
                 <x-button class="ml-4">
-                    <a href="{{ route('produit.index') }}">
+                    <a href="{{ route('client.index') }}">
                         {{ __('back to reporting') }}
                     </a>
                 </x-button>
@@ -18,11 +18,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class=" bg-white border-gray-200 px-3 pt-16 pb-6">
-                        <h1 class="uppercase text-center tracking-wider text-gray-800 text-4xl font-semibold">Module Client</h1>
-                        <p class="text-2xl text-center mt-4">
+                        <p class="text-2xl text-center mt-4 uppercase font-semibold">
                             Edition du client {{$client->designation}}
                         </p>
-                        <form method="POST" action="{{ route('client.store') }}">
+                        <form method="POST" action="{{ route('client.update',['client' => $client->id]) }}" enctype="multipart/form-data">
+                            @method('PATCH')
                             @csrf
                             <div class="px-20">
                                 <x-label for="designation" :value="__('Designation')" />
@@ -37,7 +37,7 @@
                                 <x-label for="delegation" :value="__('Delegation')" />
                                 <select class="rounded-md shadow-sm w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="delegation">
                                   @foreach ($delegations as $delegation)
-                                      <option value="{{old('delegation->id') ?? $delegation->id}}">{{$delegation->name}}</option>
+                                      <option value={{$delegation->id}} {{ $client->delegation_id === $delegation->id ? 'selected':'' }} >{{$delegation->name}}</option>
                                   @endforeach
                                 </select>
                                 @error('delegation')
@@ -116,7 +116,7 @@
                                 <x-label for="categorie" :value="__('Categorie')" />
                                 <select class="rounded-md shadow-sm w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="categorie">
                                   @foreach ($categories as $categorie)
-                                      <option value={{$categorie->id}}>{{$categorie->name}}</option>
+                                      <option value={{$categorie->id}} {{ $client->categorie_id == $categorie->id ? 'selected':'' }}>{{$categorie->name}}</option>
                                   @endforeach
                                 </select>
                                 @error('categorie')
@@ -125,10 +125,11 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="mt-4 px-20">
+
+                            <div class="px-20 mt-4">
                                 <x-label for="scan_titre" :value="__('Scan titre')" />
-                                <x-input id="scan_titre" class="block mt-1 w-full" type="text" name="scan_titre" :value="old('scan_titre') ?? $client->scan_titre" />
-                            </div>
+                                <input class="px-4 py-4 rounded-lg border-dashed border-2 border-gray-200 bg-white h-full w-full" type="file" name="scan_titre">
+                                <div class="flex justify-between items-center text-gray-400"> <span>Accepted file type:.doc only</span> <span class="flex items-center "><i class="fa fa-lock mr-1"></i> secure</span> </div>
                             </div>
                             <div class="flex items-center justify-end mt-4 px-20 mb-6">
                                 <x-button class="ml-4">
