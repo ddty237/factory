@@ -27,14 +27,6 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'designation' => ['required'],
-            'delegation' => ['required'],
-            'categorie' => ['required'],
-            'phone' => ['required','numeric'],
-            'reference_titre' => ['unique']
-        ]);
-
         $DirName = 'titreClient';
         $file = $request->file('scan_titre');
         $fileDetails = $request->scan_titre;
