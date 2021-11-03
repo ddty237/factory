@@ -17,4 +17,9 @@ class SubProduct extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function dataBilling()
+    {
+        return $this->hasMany(BillingDataController::class);
+    }
+
 }

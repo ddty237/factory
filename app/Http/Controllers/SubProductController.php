@@ -22,7 +22,7 @@ class SubProductController extends Controller
             'montant' => $request->montant
         ]);
 
-        return redirect('produit')->with('message','Votre sous-produit a été enregistré avec succès.');
+        return redirect('produit')->with('success','Votre sous-produit a été enregistré avec succès.');
     }
 
 

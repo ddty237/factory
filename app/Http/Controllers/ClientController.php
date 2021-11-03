@@ -6,8 +6,6 @@ use App\Models\Client;
 use App\Models\Categorie;
 use App\Models\Delegation;
 use Illuminate\Http\Request;
-
-use function PHPSTORM_META\map;
 use Illuminate\Support\Facades\Storage;
 
 class ClientController extends Controller
@@ -27,6 +25,14 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'designation' => ['required', 'string'],
+            'delegation' => ['required', 'integer'],
+            'phone' => ['required', 'numeric'],
+            'compte_auxilliaire' => ['required', 'string'],
+            'reference_titre' => ['required', 'string', 'unique:clients'],
+        ]);
+
         $DirName = 'titreClient';
         $file = $request->file('scan_titre');
         $fileDetails = $request->scan_titre;
@@ -46,7 +52,7 @@ class ClientController extends Controller
             'reference_titre' => $request->reference_titre,
         ]);
 
-        return redirect('client')->with('message','Votre client a été enregistré avec succès.');
+        return redirect('client')->with('success','Votre client a été enregistré avec succès.');
     }
 
     public function show(Client $client)
@@ -64,6 +70,14 @@ class ClientController extends Controller
 
     public function update(Request $request, Client $client)
     {
+        $request->validate([
+            'designation' => ['required', 'string'],
+            'delegation' => ['required', 'integer'],
+            'phone' => ['required', 'numeric'],
+            'compte_auxilliaire' => ['required', 'string'],
+            'reference_titre' => ['required', 'string'],
+        ]);
+
         Storage::delete([$client->scan_titre, '']);
 
         $DirName = 'titreClient';
@@ -85,7 +99,7 @@ class ClientController extends Controller
             'reference_titre' => $request->reference_titre,
         ]);
 
-        return redirect('client');
+        return redirect('client')->with('success','Votre client a été modifier avec succès.');
     }
 
     public function imageStorage($dirName, $file, $fileDetails)
@@ -103,5 +117,4 @@ class ClientController extends Controller
         }
 
     }
-
 }

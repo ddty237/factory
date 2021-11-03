@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class BillingDataController extends Controller
@@ -13,7 +15,9 @@ class BillingDataController extends Controller
 
     public function create()
     {
-        return view('BillingData.create');
+        $clients = Client::all();
+        $produits = Product::all();
+        return view('BillingData.create', compact('clients','produits'));
     }
 
     public function store()

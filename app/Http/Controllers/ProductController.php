@@ -26,12 +26,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'designation' => ['required'],
-            'description' => ['nullable'],
-            'compte_collectif' => ['nullable'],
-            'codification' => ['nullable'],
-            'direction' => ['nullable'],
-            'montant' => ['nullable']
+            'designation' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'compte_collectif' => ['required', 'string'],
+            'codification' => ['required', 'integer', 'max:255'],
+            'direction' => ['required', 'integer']
         ]);
 
         Product::create([
@@ -43,7 +42,7 @@ class ProductController extends Controller
             'montant' => $request->montant
         ]);
 
-        return redirect('produit')->with('message','Votre produit a été enregistré avec succès');
+        return redirect('produit')->with('success','Votre produit a été enregistré avec succès');
     }
 
     public function show(Product $produit)

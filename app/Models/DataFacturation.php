@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Client;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DataFacturation extends Model
 {
@@ -11,4 +13,20 @@ class DataFacturation extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $fillable = [];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function produit()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function subProduct()
+    {
+        return $this->belongsTo(SubProduct::class);
+    }
 }

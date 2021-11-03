@@ -34,4 +34,9 @@ class Client extends Model
     {
         return $this->belongsTo(Delegation::class);
     }
+
+    public function dataBilling()
+    {
+        return $this->hasMany(BillingDataController::class);
+    }
 }

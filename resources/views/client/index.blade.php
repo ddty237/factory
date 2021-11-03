@@ -22,12 +22,7 @@
                         <p class="text-2xl text-center mt-4 mb-4">
                             Reporting des clients
                         </p>
-                        @if (session()->has('message'))
-                            <div class="px-5 py-5 mx-5 my-2 rounded-lg h-50 bg-green-200 text-green-600">
-                                {{ session()->get('message') }}
-                            </div>
-                        @endif
-
+                        <x-alert.success></x-alert.success>
                         <table class="min-w-full overflow-visible divide-y divide-gray-200 border mr-3">
                             <thead>
                                     <th class="px-6 py-3 bg-gray-50">

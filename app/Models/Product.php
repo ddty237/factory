@@ -22,4 +22,9 @@ class Product extends Model
     {
         return $this->hasMany(SubProduct::class);
     }
+
+    public function dataBilling()
+    {
+        return $this->hasMany(BillingDataController::class);
+    }
 }

@@ -22,6 +22,9 @@
                         <p class="text-2xl text-center mt-4">
                             Creation d'un produit
                         </p>
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
                         <form method="POST" action="{{ route('produit.store') }}">
                             @csrf
                             <div class="px-20">

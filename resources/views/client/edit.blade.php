@@ -21,6 +21,9 @@
                         <p class="text-2xl text-center mt-4 uppercase font-semibold">
                             Edition du client {{$client->designation}}
                         </p>
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
                         <form method="POST" action="{{ route('client.update',['client' => $client->id]) }}" enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf

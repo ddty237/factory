@@ -21,6 +21,8 @@
                         <p class="text-2xl text-center mt-4">
                             Création d'un sous-produit
                         </p>
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
                         <form method="POST" action="{{ route('subProduct.store') }}">
                             @csrf
                             <div class="px-20">
