@@ -49,7 +49,9 @@
                               <td class="px-4 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                   <div class="text-sm font-medium text-gray-900">
-                                    {{ $product->designation }}
+                                      <a class='text-indigo-700' href="{{ route('produit.show',['produit' => $product->id]) }}">
+                                        {{ $product->designation }}
+                                      </a>
                                   </div>
                                 </div>
                               </td>

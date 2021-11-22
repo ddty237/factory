@@ -22,7 +22,7 @@
                     <p class="text-2xl text-center mt-4 mb-4">
                         Reporting des clients
                     </p>
-                    
+
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                           <tr>
@@ -49,7 +49,9 @@
                               <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                   <div class="text-sm font-medium text-gray-900">
-                                    {{ $client->designation }}
+                                      <a class='text-indigo-700' href="{{ route('client.show',['client' => $client->id]) }}">
+                                        {{ $client->designation }}
+                                      </a>
                                   </div>
                                 </div>
                               </td>

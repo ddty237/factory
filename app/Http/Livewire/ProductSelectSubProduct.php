@@ -28,19 +28,19 @@ class ProductSelectSubProduct extends Component
         $this->clients = $clients;
     }
 
-    public function save()
+    public function save(Request $request)
     {
         $this->validate();
         $datas = $this->datas;
         $produitId = $this->produitId;
-        dd($produitId);
 
         if(!$datas == NULL){
-            //dd(count($datas));
+
             for($i = 0; $i < count($datas); $i++){
-                SubproductObservation::create([
+
+                $observation = SubproductObservation::create([
                     'product_sub_categorie_id' => 0,
-                    'produit_id' => $produitId,
+                    'product_id' => $produitId,
                     'data_facturation_id' => 0,
                     'observation' => $datas[$i]['observation'],
                     'montant' => $datas[$i]['montant']
