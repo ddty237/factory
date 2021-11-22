@@ -26,90 +26,50 @@
                         <p class="text-2xl text-center mt-4 mb-4">
                             Reporting des produits
                         </p>
-                        <x-alert.success></x-alert.success>
-                        <table class="min-w-full overflow-visible divide-y divide-gray-200 border mr-3">
-                            <thead>
-                                    <th class="px-6 py-3 bg-gray-50">
-                                        <span class="text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Designation</span>
-                                    </th>
-                                    <th class="px-6 py-3 bg-gray-50">
-                                        <span class="text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">codification</span>
-                                    </th>
-                                    <th class="px-6 py-3 bg-gray-50">
-                                        <span class="text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">direction</span>
-                                    </th>
-                                    <th class="px-6 py-3 bg-gray-50">
-                                        <span class="text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">montant</span>
-                                    </th>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200 divide-solid">
-                                @foreach ($products as $product)
-                                    <tr class="bg-white">
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
-                                            {{ $product->designation }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
-                                            {{ $product->codification }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
-                                            {{ $product->direction->name }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
-                                            {{ $product->montant }}
-                                        </td>
-                                        <td class="py-4 whitespace-no-wrap text-sm text-gray-900">
-                                            <div class="flex items-center">
-                                                <x-button>
-                                                    <a href="{{ route('produit.show',['produit' => $product->id]) }}">
-                                                        {{ __('modifier le produit') }}
-                                                    </a>
-                                                </x-button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="text-xl uppercase font-semibold mx-3 text-gray-800">Sous-produit</div>
-                    <div class="px-4 pb-4 mr-1">
-                            <table class="min-w-full overflow-visible divide-y divide-gray-200 border">
-                            <thead>
-                                    <th class="px-6 py-3 bg-gray-50">
-                                        <span class="text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Designation</span>
-                                    </th>
-                                    <th class="px-6 py-3 bg-gray-50">
-                                        <span class="text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Produit rattaché</span>
-                                    </th>
-                                    <th class="px-6 py-3 bg-gray-50">
-                                        <span class="text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">montant</span>
-                                    </th>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200 divide-solid">
-                                @foreach ($subproducts as $subproduct)
-                                    <tr class="bg-white">
-                                        <td class="px-5 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
-                                            {{ $subproduct->product_description }}
-                                        </td>
-                                        <td class="px-5 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
-                                            {{ $subproduct->product->designation }}
-                                        </td>
-                                        <td class="px-5 py-4 whitespace-no-wrap text-sm leading-5 text-center text-gray-900">
-                                            {{ $subproduct->montant }}
-                                        </td>
-                                        <td class="py-4 whitespace-no-wrap text-sm text-gray-900">
-                                            <div class="flex items-center">
-                                                <x-button>
-                                                    <a href="{{ route('produit.show',['produit' => $product->id]) }}">
-                                                        {{ __('modifier le sous-produit') }}
-                                                    </a>
-                                                </x-button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                          <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Libellé
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
+                              Description
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
+                              Direction
+                            </th>
+                            <th scope="col" class="relative px-6 py-3">
+                              <span class="sr-only">Edit</span>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                          @foreach ($products as $product)
+                            <tr>
+                              <td class="px-4 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                  <div class="text-sm font-medium text-gray-900">
+                                    {{ $product->designation }}
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="px-3 py-2 whitespace-nowrap">
+                                <div class="text-sm text-gray-900 text-center">
+                                  {{ $product->description}}
+                                </div>
+                              </td>
+                              <td class="px-3 py-2 whitespace-nowrap">
+                                <div class="text-sm text-gray-900 text-center">
+                                  {{ $product->direction->name }}
+                                </div>
+                              </td>
+                              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                  <a href="{{ route('produit.edit',['produit' => $product->id]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                              </td>
+                            </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
                     </div>
             </div>
         </div>

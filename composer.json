@@ -10,7 +10,10 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "laraveldaily/laravel-invoices": "2.0",
+        "livewire/livewire": "^2.7",
+        "power-components/livewire-powergrid": "^1.4"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

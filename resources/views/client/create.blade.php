@@ -23,7 +23,8 @@
                             Creation d'un client
                         </p>
                         <!-- Validation Errors -->
-                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                        <x-alert.success></x-alert.success>
+                        <x-auth-validation-errors class="mb-4 ml-16" :errors="$errors" />
 
                         <form method="POST" action="{{ route('client.store') }}" enctype="multipart/form-data">
                             @csrf
@@ -37,21 +38,12 @@
                                 @enderror
                             </div>
                             <div class="px-20 mt-4">
-                                <x-label for="delegation" :value="__('Delegation')" />
-                                <select class="rounded-md shadow-sm w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="delegation">
-                                  @foreach ($delegations as $delegation)
-                                      <option value={{$delegation->id}}>{{$delegation->name}}</option>
+                                <x-label for="ville" :value="__('Villes')" />
+                                <select class="rounded-md shadow-sm w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="ville">
+                                  @foreach ($villes as $ville)
+                                      <option value={{$ville->id}}>{{$ville->name}}</option>
                                   @endforeach
                                 </select>
-                                @error('categorie')
-                                    <div class="mt-1 font-semibold text-red-500">
-                                        Ce champs est réquis.
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="mt-4 px-20">
-                                <x-label for="ville" :value="__('Ville')" />
-                                <x-input id="ville" class="block mt-1 w-full{{ $errors->has('ville') ? ' border-red-500' : '' }}" type="text" name="ville" :value="old('ville')" placeholder="champs requis"/>
                                 @error('ville')
                                     <div class="mt-1 font-semibold text-red-500">
                                         Ce champs est réquis.

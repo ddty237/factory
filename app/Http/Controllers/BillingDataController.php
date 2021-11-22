@@ -13,16 +13,27 @@ class BillingDataController extends Controller
         return view('BillingData.index');
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $clients = Client::all();
-        $produits = Product::all();
-        return view('BillingData.create', compact('clients','produits'));
+        return view('BillingData.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'client_id' => ['required'],
+            'product_id' => ['required'],
+            'observation_general' => ['nullable'],
+        ]);
+
+
+        /*
+        +----+-------------+------------+-----------+------------+----------------+
+        | ID | observation | produit_id | client_id | données_id |                |
+        +----+-------------+------------+-----------+------------+----------------+
+        |    |             |            |           |            |                |
+        +----+-------------+------------+-----------+------------+----------------+
+        */
     }
 
     public function show()

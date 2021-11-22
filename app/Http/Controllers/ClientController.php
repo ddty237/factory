@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Categorie;
-use App\Models\Delegation;
+use App\Models\Ville;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -19,15 +20,17 @@ class ClientController extends Controller
     public function create()
     {
         $categories = Categorie::all();
-        $delegations = Delegation::all();
-        return view('client.create',compact('categories','delegations'));
+        $villes = Ville::all();
+        return view('client.create',compact('categories','villes'));
     }
 
     public function store(Request $request)
     {
+        $userId = Auth::user()->id;
+
         $request->validate([
             'designation' => ['required', 'string'],
-            'delegation' => ['required', 'integer'],
+            'ville' => ['required', 'integer'],
             'phone' => ['required', 'numeric'],
             'compte_auxilliaire' => ['required', 'string'],
             'reference_titre' => ['required', 'string', 'unique:clients'],
@@ -40,7 +43,7 @@ class ClientController extends Controller
 
         Client::create([
             'designation' => $request->designation,
-            'delegation_id' => $request->delegation,
+            'ville_id' => $request->ville,
             'code_postal' => $request->code_postal,
             'adresse' => $request->adresse,
             'phone' => $request->phone,
@@ -50,29 +53,31 @@ class ClientController extends Controller
             'website' => $request->website,
             'scan_titre' => $fileName,
             'reference_titre' => $request->reference_titre,
+            'user_id' => $userId
         ]);
 
-        return redirect('client')->with('success','Votre client a été enregistré avec succès.');
+        return redirect('client/create')->with('success','Votre client a été enregistré avec succès.');
     }
 
-    public function show(Client $client)
+    public function show(Client $client, Ville $ville)
     {
-        $client =$client;
-        return view('client.show',compact('client'));
+        $client = $client;
+        $ville = $ville;
+        return view('client.show',compact('client','ville'));
     }
 
     public function edit(Client $client)
     {
         $categories = Categorie::all();
-        $delegations = Delegation::all();
-        return view('client.edit',compact('client','categories','delegations'));
+        $villes = Ville::all();
+        return view('client.edit',compact('client','categories','villes'));
     }
 
     public function update(Request $request, Client $client)
     {
         $request->validate([
             'designation' => ['required', 'string'],
-            'delegation' => ['required', 'integer'],
+            'ville' => ['required', 'integer'],
             'phone' => ['required', 'numeric'],
             'compte_auxilliaire' => ['required', 'string'],
             'reference_titre' => ['required', 'string'],
@@ -87,7 +92,7 @@ class ClientController extends Controller
 
         $client = Client::where('id',$client->id)->update([
             'designation' => $request->designation,
-            'delegation_id' => $request->delegation,
+            'ville_id' => $request->ville,
             'code_postal' => $request->code_postal,
             'adresse' => $request->adresse,
             'phone' => $request->phone,
@@ -97,6 +102,7 @@ class ClientController extends Controller
             'website' => $request->website,
             'scan_titre' => $fileName,
             'reference_titre' => $request->reference_titre,
+            'user_id' => $userId
         ]);
 
         return redirect('client')->with('success','Votre client a été modifier avec succès.');
@@ -115,6 +121,5 @@ class ClientController extends Controller
         }else{
             return NULL;
         }
-
     }
 }

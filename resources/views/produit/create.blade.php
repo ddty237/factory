@@ -23,7 +23,8 @@
                             Creation d'un produit
                         </p>
                         <!-- Validation Errors -->
-                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                        <x-alert.success></x-alert.success>
+                        <x-auth-validation-errors class="mb-4 ml-16" :errors="$errors" />
 
                         <form method="POST" action="{{ route('produit.store') }}">
                             @csrf
@@ -58,14 +59,9 @@
                             </div>
                             <div class="px-20 mt-4">
                                 <label for="remember_me" class="inline-flex items-center">
-                                    <input id="haveCategorie" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="haveCategorie" onclick="isChecked()"/>
-                                    <span class="ml-2 text-sm text-gray-600">{{ __('Admet une sous-produit') }}</span>
+                                    <input id="haveSubCategorie" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="haveSubCategorie"/>
+                                    <span class="ml-2 text-sm text-gray-600">{{ __('Ce produit admet un sous-produit') }}</span>
                                 </label>
-                            </div>
-
-                            <div class="mt-4 px-20">
-                                <x-label for="montant" :value="__('Montant')" />
-                                <x-input id="montant" class="block mt-1 w-full" type="text" name="montant" :value="old('montant')" />
                             </div>
                             </div>
                             <div class="flex items-center justify-end mt-4 px-20 mb-6">
@@ -79,22 +75,3 @@
         </div>
     </div>
 </x-app-layout>
-<script>
-
-        console.log('ok');
-        categorie = document.getElementById('haveCategorie').checked;
-        montant = document.getElementById('montant');
-
-        function isChecked() {
-            categorie = !categorie;
-
-            if(categorie) {
-                montant.disabled = true;
-            }else{
-                montant.disabled = false;
-            }
-        }
-
-
-
-</script>

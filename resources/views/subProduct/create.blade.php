@@ -23,10 +23,11 @@
                         </p>
                         <!-- Validation Errors -->
                         <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                        <x-alert.success></x-alert.success>
                         <form method="POST" action="{{ route('subProduct.store') }}">
                             @csrf
                             <div class="px-20">
-                                <x-label for="products" :value="__('Catégories')" />
+                                <x-label for="products" :value="__('Catégorie')" />
                                 <select class="rounded-md shadow-sm w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="product">
                                   @foreach ($products as $product)
                                       <option value={{$product->id}}>{{$product->designation}}</option>
@@ -37,16 +38,11 @@
                                         Ce champs est réquis.
                                     </div>
                                 @enderror
-                            </div>
-                            <div class="mt-4 px-20">
-                                <x-label for="description" :value="__('Description du sous-produit')" />
-                                <x-input id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" />
-                            </div>
-
-                            <div class="mt-4 px-20">
-                                <x-label for="montant" :value="__('Montant')" />
-                                <x-input id="montant" class="block mt-1 w-full" type="text" name="montant" :value="old('montant')" />
-                            </div>
+                                </div>
+                                <div class="mt-4 px-20">
+                                    <x-label for="description" :value="__('Description du sous-produit')" />
+                                    <x-input id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" />
+                                </div>
                             </div>
                             <div class="flex items-center justify-end mt-4 px-20 mb-6">
                                 <x-button class="ml-4">

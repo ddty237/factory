@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Client;
+use App\Models\Delegation;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ville extends Model
 {
@@ -13,4 +15,14 @@ class Ville extends Model
     protected $fillable = ['name'];
 
     protected $guarded = [];
+
+    public function clients()
+    {
+        return $this->hasMany(Client::class);
+    }
+
+    public function delegation()
+    {
+        return $this->belongsTo(Delegation::class);
+    }
 }

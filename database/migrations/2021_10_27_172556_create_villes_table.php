@@ -15,6 +15,7 @@ class CreateVillesTable extends Migration
     {
         Schema::create('villes', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('delegation_id');
             $table->string('name');
         });
     }

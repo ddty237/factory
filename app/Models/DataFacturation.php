@@ -12,8 +12,8 @@ class DataFacturation extends Model
     protected $table = "data_facturation";
     use HasFactory;
 
+    protected $fillable = ['client_id','product_id','montant_facture','observation_general'];
     protected $guarded = [];
-    protected $fillable = [];
 
     public function client()
     {

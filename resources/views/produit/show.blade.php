@@ -21,28 +21,29 @@
                             {{$produit->designation}}
                         </p>
                             <div class="px-20">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Designation</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$produit->designation}}</div>
+                                <div class="font-semibold uppercase text-xl text-gray-700">Designation :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$produit->designation}}</span>
+                                </div>
                             </div>
                             <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Description</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$produit->description}}</div>
+                                <div class="font-semibold uppercase text-xl text-gray-700">Description :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$produit->description}}</span>
+                                </div>
                             </div>
                             <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Codification budgétaire</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$produit->codification}}</div>
+                                <div class="font-semibold uppercase text-xl text-gray-700">Codification budgétaire :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$produit->codification}}</span>
+                                </div>
                             </div>
                             <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Compte collectif</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-7900">{{$produit->compte_collectif}}</div>
+                                <div class="font-semibold uppercase text-xl text-gray-700">Compte collectif :
+                                    <span class="leading-4 text-normal text-lg text-gray-7900">{{$produit->compte_collectif}}</span>
+                                </div>
                             </div>
                             <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Direction rattaché</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$produit->direction->name}}</div>
-                            </div>
-                            <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Montant</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$produit->montant}}</div>
+                                <div class="font-semibold uppercase text-xl text-gray-700">Direction rattaché :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$produit->direction->name}}</span>
+                                </div>
                             </div>
                             <div class="flex items-center justify-end mt-4 px-20 mb-6">
                                 <x-button class="ml-4">

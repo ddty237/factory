@@ -26,11 +26,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'designation' => ['required', 'string', 'max:255'],
+            'designation' => ['required', 'string','unique:products'],
             'description' => ['required', 'string'],
             'compte_collectif' => ['required', 'string'],
-            'codification' => ['required', 'integer', 'max:255'],
-            'direction' => ['required', 'integer']
+            'codification' => ['required', 'string'],
+            'direction' => ['required', 'integer'],
         ]);
 
         Product::create([
@@ -39,10 +39,10 @@ class ProductController extends Controller
             'compte_collectif' => $request->compte_collectif,
             'codification' => $request->codification,
             'direction_id' => $request->direction,
-            'montant' => $request->montant
+            'have_sub_categorie' => $request->boolean('haveSubCategorie')
         ]);
 
-        return redirect('produit')->with('success','Votre produit a été enregistré avec succès');
+        return redirect('produit/create')->with('success','Votre produit a été enregistré avec succès');
     }
 
     public function show(Product $produit)
@@ -51,8 +51,31 @@ class ProductController extends Controller
         return view('produit.show', compact('produit'));
     }
 
-    public function edit()
+    public function edit(Product $produit)
     {
-        return view('produit.edit');
+        $directions = Direction::all();
+        return view('produit.edit', compact('produit','directions'));
+    }
+
+    public function update(Request $request, Product $produit)
+    {
+        $request->validate([
+            'designation' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'compte_collectif' => ['required', 'string'],
+            'codification' => ['required', 'numeric'],
+            'direction' => ['required', 'integer']
+        ]);
+
+        Product::where('id',$produit->id)->update([
+            'designation' => $request->designation,
+            'description' => $request->description,
+            'compte_collectif' => $request->compte_collectif,
+            'codification' => $request->codification,
+            'direction_id' => $request->direction,
+            'have_sub_categorie' => $request->boolean('haveSubCategorie')
+        ]);
+
+        return redirect('produit')->with('success','Votre produit a été mise à jour avec succès');
     }
 }

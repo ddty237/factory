@@ -13,57 +13,70 @@
                             {{$client->designation}}
                         </p>
                             <div class="px-20">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Designation</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->designation}}</div>
-                            </div>
-                            <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Delegation</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->delegation->name}}</div>
-                            </div>
-                            <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Ville</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->ville}}</div>
-                            </div>
-                            <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Code postal</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-7900">{{$client->code_postal}}</div>
-                            </div>
-                            <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Adresse</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->adresse}}</div>
-                            </div>
-                            <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Téléphone</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->phone}}</div>
-                            </div>
-                            <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Téléphone 2</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->secondary_phone}}</div>
-                            </div>
-                            <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Site web</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->website}}</div>
-                            </div>
-                            <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Reference du titre</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->reference_titre}}</div>
-                            </div>
-                            <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Email</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->email}}</div>
-                            </div>
-                            <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Compte auxilliaire</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->compte_auxilliaire}}</div>
-                            </div>
-                            <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Categotie</div>
-                                <div class="block leading-4 text-normal text-lg text-gray-900">{{$client->categorie->name}}</div>
-                            </div>
-                            <div class="px-20 mt-4">
-                                <div class="block font-semibold uppercase text-xl text-gray-700">Scan contrat</div>
+                                <div class="font-semibold uppercase text-xl text-gray-700">Designation :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$client->designation}}</span>
+                                </div>
 
-                                <img src="{{asset("storage/". substr($client->scan_titre,7))}}" alt="scan titre">
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="font-semibold uppercase text-xl text-gray-700">Delegation :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$client->ville->delegation->name}}</span>
+                                </div>
+
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="font-semibold uppercase text-xl text-gray-700">Ville :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$client->ville->name}}</span>
+                                </div>
+
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="font-semibold uppercase text-xl text-gray-700">Code postal :
+                                    <span class="leading-4 text-normal text-lg text-gray-7900">{{$client->code_postal}}</span>
+                                </div>
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="font-semibold uppercase text-xl text-gray-700">Adresse :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$client->adresse}}</span>
+                                </div>
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="font-semibold uppercase text-xl text-gray-700">Téléphone :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$client->phone}}</span>
+                                </div>
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="font-semibold uppercase text-xl text-gray-700">Téléphone 2 :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$client->secondary_phone}}</span>
+                                </div>
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="font-semibold uppercase text-xl text-gray-700">Site web :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$client->website}}</span>
+                                </div>
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="font-semibold uppercase text-xl text-gray-700">Reference du titre :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$client->reference_titre}}</span>
+                                </div>
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="font-semibold uppercase text-xl text-gray-700">Email :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$client->email}}</span>
+                                </div>
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="font-semibold uppercase text-xl text-gray-700">Compte auxilliaire :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$client->compte_auxilliaire}}</span>
+                                </div>
+                            </div>
+                            <div class="px-20 mt-4">
+                                <div class="font-semibold uppercase text-xl text-gray-700">Categotie :
+                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$client->categorie->name}}</span>
+                                </div>
+                            </div>
+                            <div class="px-20 mt-4">
+                                <a class="text-indigo-800" href="{{$client->scan_titre ? asset("storage/". substr($client->scan_titre,7)) : '' }}" >Cliquez ici pour voir le scan du contrat</a>
                             </div>
                             <div class="flex items-center justify-end mt-4 px-20 mb-6">
                                 <x-button class="ml-4">

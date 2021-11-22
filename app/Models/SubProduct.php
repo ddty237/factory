@@ -10,6 +10,7 @@ class SubProduct extends Model
 {
     protected $table = "product_sub_categories";
     use HasFactory;
+    protected $fillable = ['product_id','product_description'];
     protected $guarded = [];
 
     public function product()

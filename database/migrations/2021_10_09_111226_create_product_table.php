@@ -17,10 +17,10 @@ class CreateProductTable extends Migration
             $table->id();
             $table->string('designation');
             $table->string('description');
-            $table->string('codification')->unique();
+            $table->string('codification');
             $table->string('compte_collectif');
             $table->bigInteger('direction_id');
-            $table->bigInteger('montant')->nullable();
+            $table->boolean('have_sub_categorie');
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Ville;
 use App\Models\Categorie;
 use App\Models\Delegation;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ class Client extends Model
 
     protected $fillable = [
         'designation',
-        'delegation_id',
+        'ville_id',
         'code_postal',
         'adresse',
         'phone',
@@ -21,6 +22,7 @@ class Client extends Model
         'categorie_id',
         'scan_titre',
         'reference_titre',
+        'user_id'
     ];
 
     protected $guarded = [];
@@ -30,9 +32,9 @@ class Client extends Model
         return $this->belongsTo(Categorie::class);
     }
 
-    public function delegation()
+    public function ville()
     {
-        return $this->belongsTo(Delegation::class);
+        return $this->belongsTo(Ville::class);
     }
 
     public function dataBilling()

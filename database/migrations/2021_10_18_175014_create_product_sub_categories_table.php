@@ -17,7 +17,6 @@ class CreateProductSubCategoriesTable extends Migration
             $table->id();
             $table->bigInteger('product_id');
             $table->string('product_description')->unique();
-            $table->bigInteger('montant');
             $table->timestamps();
         });
     }

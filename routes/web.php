@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubProductController;
+use App\Models\SubProduct;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +41,7 @@ Route::resource('client', ClientController::class);
 //product
 Route::resource('produit',ProductController::class);
 //subProduct
-Route::get('subProduct/create',[SubProductController::class,'create'])->name('subProduct.create');
-Route::post('subProduct/store',[SubProductController::class,'store'])->name('subProduct.store');
+Route::resource('subProduct',SubProductController::class);
 //Billing data
 Route::resource('billingData',BillingDataController::class);
 

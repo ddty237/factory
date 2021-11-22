@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->bigInteger('direction_id');
             $table->bigInteger('poste_id');
             $table->integer('phone_number')->nullable();
+            $table->integer('role_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
