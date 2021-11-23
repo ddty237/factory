@@ -25,15 +25,6 @@ class BillingDataController extends Controller
             'product_id' => ['required'],
             'observation_general' => ['nullable'],
         ]);
-
-
-        /*
-        +----+-------------+------------+-----------+------------+----------------+
-        | ID | observation | produit_id | client_id | données_id |                |
-        +----+-------------+------------+-----------+------------+----------------+
-        |    |             |            |           |            |                |
-        +----+-------------+------------+-----------+------------+----------------+
-        */
     }
 
     public function show()

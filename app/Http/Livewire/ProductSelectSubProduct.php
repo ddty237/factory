@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Client;
+use App\Models\DataFacturation;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\SubProduct;
@@ -13,6 +14,8 @@ use App\Models\SubproductObservation;
 class ProductSelectSubProduct extends Component
 {
     public $produitId = '1';
+    public $clientId = '1';
+    public $montantTotal;
     public $datas;
 
     protected $rules = [
@@ -33,8 +36,16 @@ class ProductSelectSubProduct extends Component
         $this->validate();
         $datas = $this->datas;
         $produitId = $this->produitId;
+        $clientId = $this->clientId;
 
         if(!$datas == NULL){
+
+            DataFacturation::create([
+                'client_id' => $clientId,
+                'product_id' => $produitId,
+                'montant_facture' => $this->montantTotal,
+                'observation_general' => ''
+            ]);
 
             for($i = 0; $i < count($datas); $i++){
 
@@ -47,11 +58,6 @@ class ProductSelectSubProduct extends Component
                 ]);
             }
         }
-
-
-
-
-
     }
 
     public function render()

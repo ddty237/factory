@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="container bg-white border-gray-200 px-4 pt-16 pb-6">
                         <h1 class="uppercase text-center tracking-wider text-gray-800 text-3xl font-semibold">Quelques textes relatifs à la facturation et au recouvrement des produits du secteur des télécommunications</h1>
-                        <p class="text-lg text-center mt-8 mx-4">
+                        <p class="text-lg flex-start mt-8 mx-4">
                             1)	La Loi n°2010/013 du 21 décembre 2010 régissant les communications électroniques au Cameroun modifiée et complétée par la loi N° 2015/006 du 20 avril 2015 modifiant et complétant certaines dispositions de la loi n° 2010/013 du 21 décembre 2010 régissant les communications électroniques au Cameroun <br>
                             2)	La loi n°2018/011 du 11 juillet 2018 portant code de transparence et de bonne gouvernance dans la gestion des finances publiques au Cameroun <br>
                             3)	La Loi n°2018/012 du 11 juillet 2018 portant Régime Financier de l’Etat et des autres entités publiques <br>

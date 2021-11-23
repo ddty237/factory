@@ -48,7 +48,7 @@
                           Forgot your password?
                         </a>
                         <a href="{{ route('register') }}" class="font-medium text-indigo-600 hover:text-indigo-500">
-                          Create your a account?
+                          Create a new account?
                         </a>
                     </div>
                 @endif

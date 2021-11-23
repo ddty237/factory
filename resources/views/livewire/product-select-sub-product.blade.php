@@ -2,7 +2,7 @@
     @csrf
     <div class="px-20 mt-4">
         <x-label for="client" :value="__('Client')" />
-        <select class="rounded-md shadow-sm w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="client">
+        <select class="rounded-md shadow-sm w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" wire:model="clientId">
             @foreach ($clients as $client)
                 <option value={{$client->id}}>{{$client->designation}}</option>
             @endforeach
@@ -46,7 +46,7 @@
     @endforeach
         <div class="mt-4 px-20">
             <x-label for="montant_total" :value="__('Montant à facturer')" />
-            <x-input id="montant_total" class="block mt-1 w-full{{ $errors->has('montant_total') ? ' border-red-500' : '' }}" type="text" name="montant" :value="old('montant_total')" placeholder="champs requis"/>
+            <x-input wire:model.lazy='montantTotal' class="block mt-1 w-full{{ $errors->has('montant_total') ? ' border-red-500' : '' }}" type="text" name="montant" :value="old('montant_total')" placeholder="champs requis"/>
             @error('montant_total')
                 <div class="mt-1 font-semibold text-red-500">
                     Ce champs est réquis.

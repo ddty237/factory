@@ -71,6 +71,9 @@
                               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                   <a href="{{ route('client.edit',['client' => $client->id]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                               </td>
+                              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Export</a>
+                              </td>
                             </tr>
                           @endforeach
                         </tbody>
