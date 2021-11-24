@@ -1,13 +1,11 @@
 <?php
 
-use App\Http\Controllers\BillingDataController;
-use App\Http\Controllers\Client;
 use Illuminate\Routing\RouteUri;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubProductController;
-use App\Models\SubProduct;
+use App\Http\Controllers\BillingDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,11 +36,15 @@ Route::get('/accueil', function() {
 
 //client
 Route::resource('client', ClientController::class);
+Route::get('client/{client}/export',[ClientController::class,'exportClient'])->name('client.export');
+Route::get('client/{client}/download', [ClientController::class,'downloadClient'])->name('client.download');
+
 //product
 Route::resource('produit',ProductController::class);
 //subProduct
 Route::resource('subProduct',SubProductController::class);
 //Billing data
 Route::resource('billingData',BillingDataController::class);
+
 
 require __DIR__.'/auth.php';

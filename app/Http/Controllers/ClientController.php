@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
-use App\Models\Categorie;
 use App\Models\Ville;
+use App\Models\Client;
+use Barryvdh\DomPDF\PDF as PDF;
+use App\Models\Categorie;
+use Facade\Ignition\Exceptions\ViewException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ClientController extends Controller
 {
@@ -102,7 +104,7 @@ class ClientController extends Controller
             'website' => $request->website,
             'scan_titre' => $fileName,
             'reference_titre' => $request->reference_titre,
-            'user_id' => $userId
+            'user_id' => Auth::user()->id
         ]);
 
         return redirect('client')->with('success','Votre client a été modifier avec succès.');
@@ -122,4 +124,23 @@ class ClientController extends Controller
             return NULL;
         }
     }
+
+    public function exportClient(Client $client, Ville $ville)
+    {
+        $client = $client;
+        $ville = $ville;
+
+        return view('client.invoice',compact('client','ville'));
+    }
+
+    public function downloadClient(Client $client)
+    {
+        $client = $client;
+
+        //telechargement en format pdf
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('client.invoice',['client'=>$client]);
+        return $pdf->download('fiche-client.pdf');
+    }
+
 }
