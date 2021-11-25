@@ -45,6 +45,15 @@ class DatabaseSeeder extends Seeder
         Sa'a, Soa
         */
         DB::table('villes')->insert([
+            ['name' => 'Yaoundé', 'delegation_id' => 1],
+            ['name' => 'Douala', 'delegation_id' => 2],
+            ['name' => 'Garoua', 'delegation_id' => 3],
+            ['name' => 'Bamenda', 'delegation_id' => 4],
+            ['name' => 'Ebolowa', 'delegation_id'=> 1],
+            ['name' =>'Bertoua', 'delegation_id' => 1],
+            ['name' =>'Maroua', 'delegation_id' => 3],
+            ['name' =>'Ngaoundéré', 'delegation_id' => 3],
+            ['name' =>'Buea', 'delegation_id' => 4],
             ['name' => 'Afanloum', 'delegation_id' => 1],
             ['name' => 'Akoeman', 'delegation_id' => 1],
             ['name' => 'Akono', 'delegation_id' => 1],
@@ -82,19 +91,14 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Mbankomo', 'delegation_id' => 1],
             ['name' => 'Mengang', 'delegation_id' => 1],
             ['name' => 'Mengueme', 'delegation_id' => 1],
-            ['name' => 'Yaoundé', 'delegation_id' => 1],
             ['name' => 'Yoko', 'delegation_id' => 1],
-            ['name' => 'Douala', 'delegation_id' => 2],
-            ['name' => 'Garoua', 'delegation_id' => 3],
-            ['name' => 'Bamenda', 'delegation_id' => 4],
         ]);
 
         DB::table('directions')->insert([
             ['name' => 'Direction du Recouvrement'],
             ['name' => 'Direction Technique'],
             ['name' => 'Direction de la Gestion des Fréquences'],
-            ['name' => 'Direction des Licences'],
-            ['name' => 'de la Concurrence et de l’Interconnexion'],
+            ['name' => 'La Direction des Licences, de la Concurrence et de l\'Interconnexion'],
             ['name' => 'Division des Affaires Juridiques et de la Protection du Consommateur'],
             ['name' => 'Direction des Finances'],
             ['name' => 'Cabinet'],

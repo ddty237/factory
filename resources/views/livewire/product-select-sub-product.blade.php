@@ -53,7 +53,6 @@
                 </div>
             @enderror
         </div>
-
         <div class="flex items-center justify-end mt-4 px-20 mb-6">
             <x-button class="ml-4">
                 {{ __('Enregistrer') }}
