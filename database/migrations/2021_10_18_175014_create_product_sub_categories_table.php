@@ -16,7 +16,7 @@ class CreateProductSubCategoriesTable extends Migration
         Schema::create('product_sub_categories', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('product_id');
-            $table->string('product_description')->unique();
+            $table->string('product_description');
             $table->timestamps();
         });
     }

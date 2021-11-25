@@ -105,7 +105,12 @@
                             </div>
                             <div class="mt-4 px-20">
                                 <x-label for="compte_auxilliaire" :value="__('Compte auxilliaire')" />
-                                <x-input id="compte_auxilliaire" class="block mt-1 w-full" type="text" name="compte_auxilliaire" :value="old('compte_auxilliaire')" />
+                                <x-input id="compte_auxilliaire" class="block mt-1 w-full" type="text" name="compte_auxilliaire" :value="old('compte_auxilliaire')" placeholder="champs requis" />
+                                @error('compte_auxilliaire')
+                                    <div class="mt-1 font-semibold text-red-500">
+                                        Ce champs est réquis.
+                                    </div>
+                                @enderror
                             </div>
                             <div class="px-20 mt-4">
                                 <x-label for="categorie" :value="__('Categorie')" />

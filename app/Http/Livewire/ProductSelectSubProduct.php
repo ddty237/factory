@@ -29,6 +29,12 @@ class ProductSelectSubProduct extends Component
         $clients = Client::all();
         $this->produits = $produits;
         $this->clients = $clients;
+        if(!$this->datas == NULL){
+            for($i = 0; $i < count($this->datas); $i++){
+                $this->montantTotal += $this->data[$i]['montant'];
+            }
+        }
+
     }
 
     public function save(Request $request)

@@ -27,51 +27,98 @@
                             Reporting des produits
                         </p>
                         <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                          <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Libellé
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
-                              Description
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
-                              Direction
-                            </th>
-                            <th scope="col" class="relative px-6 py-3">
-                              <span class="sr-only">Edit</span>
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                          @foreach ($products as $product)
+                            <thead class="bg-gray-50">
                             <tr>
-                              <td class="px-4 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                  <div class="text-sm font-medium text-gray-900">
-                                      <a class='text-indigo-700' href="{{ route('produit.show',['produit' => $product->id]) }}">
-                                        {{ $product->designation }}
-                                      </a>
-                                  </div>
-                                </div>
-                              </td>
-                              <td class="px-3 py-2 whitespace-nowrap">
-                                <div class="text-sm text-gray-900 text-center">
-                                  {{ $product->description}}
-                                </div>
-                              </td>
-                              <td class="px-3 py-2 whitespace-nowrap">
-                                <div class="text-sm text-gray-900 text-center">
-                                  {{ $product->direction->name }}
-                                </div>
-                              </td>
-                              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                  <a href="{{ route('produit.edit',['produit' => $product->id]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                              </td>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Libellé
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
+                                Description
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
+                                Direction
+                                </th>
+                                <th scope="col" class="relative px-6 py-3">
+                                <span class="sr-only">Edit</span>
+                                </th>
                             </tr>
-                          @endforeach
-                        </tbody>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach ($products as $product)
+                                <tr>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                    <div class="text-sm font-medium text-gray-900">
+                                        <a class='text-indigo-700' href="{{ route('produit.show',['produit' => $product->id]) }}">
+                                            {{ $product->designation }}
+                                        </a>
+                                    </div>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-2 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900 text-center">
+                                    {{ $product->description}}
+                                    </div>
+                                </td>
+                                <td class="px-3 py-2 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900 text-center">
+                                    {{ $product->direction->name }}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="{{ route('produit.edit',['produit' => $product->id]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
                       </table>
+                      <p class="text-2xl text-center mt-8 mb-4">Reporting des sous-produits</p>
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Libellé
+                                </th>
+                                <th scope="col" class="px-6 py-3  text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
+                                Produit parent
+                                </th>
+                                <th scope="col" class="px-6 py-3  text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
+                                Direction
+                                </th>
+                                <th scope="col" class="relative px-6 py-3">
+                                <span class="sr-only">Edit</span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach ($subproducts as $subproduct)
+                                <tr>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                    <div class="text-sm font-medium text-gray-900">
+                                        <a class='text-indigo-700' href="{{ route('subProduct.show',['subProduct' => $subproduct->id]) }}">
+                                            {{ $subproduct->product_description }}
+                                        </a>
+                                    </div>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-2 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900 text-center">
+                                    {{ $subproduct->product->designation}}
+                                    </div>
+                                </td>
+                                <td class="px-3 py-2 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900 text-center">
+                                    {{ $subproduct->product->direction->name }}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="{{ route('subProduct.edit',['subProduct' => $subproduct->id]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
             </div>
         </div>

@@ -46,7 +46,7 @@
     @endforeach
         <div class="mt-4 px-20">
             <x-label for="montant_total" :value="__('Montant à facturer')" />
-            <x-input wire:model.lazy='montantTotal' class="block mt-1 w-full{{ $errors->has('montant_total') ? ' border-red-500' : '' }}" type="text" name="montant" :value="old('montant_total')" placeholder="champs requis"/>
+            <x-input wire:model='montantTotal' class="block mt-1 w-full{{ $errors->has('montant_total') ? ' border-red-500' : '' }}" type="text" name="montant" :value="old('montant_total')" placeholder="champs requis"/>
             @error('montant_total')
                 <div class="mt-1 font-semibold text-red-500">
                     Ce champs est réquis.
