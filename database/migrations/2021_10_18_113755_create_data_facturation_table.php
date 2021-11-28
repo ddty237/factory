@@ -17,9 +17,11 @@ class CreateDataFacturationTable extends Migration
             $table->id();
             $table->bigInteger('client_id');
             $table->bigInteger('product_id');
-            $table->string('observation_general');
-            $table->string('observation_relative');
+            $table->string('observation_general')->nullable();
             $table->bigInteger('montant_facture');
+            $table->string('reference_contrat')->nullable();
+            $table->string('scan_contrat')->nullable();
+            $table->string('scan_donnee')->nullable();
             $table->timestamps();
         });
     }

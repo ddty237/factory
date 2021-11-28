@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
-use App\Models\Product;
+use App\Models\DataFacturation;
 use Illuminate\Http\Request;
 
 class BillingDataController extends Controller
 {
     public function index()
     {
-        return view('BillingData.index');
+        $datas = DataFacturation::all();
+        return view('BillingData.index', compact('datas'));
     }
 
     public function create(Request $request)
@@ -27,9 +27,10 @@ class BillingDataController extends Controller
         ]);
     }
 
-    public function show()
+    public function show($id)
     {
-        return view('BillingData.show');
+        $data = DataFacturation::findOrfail($id);
+        return view('BillingData.show', compact('data'));
     }
 
     public function edit()

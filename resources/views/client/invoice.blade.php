@@ -48,9 +48,9 @@
 <div class="information">
     <table width="100%">
         <tr>
-            <td align="left" style="width: 40%;">
-                <h3 style="text-align: center">RÉPUBLIQUE DU CAMEROUN</h3>
-                <pre style="text-align: center">
+            <td align="left" style="width: 40%; text-align:center;">
+                <h3>RÉPUBLIQUE DU CAMEROUN</h3>
+                <pre>
                     Paix - Travail - Patrie
                     ---------------
                     AGENCE DE REGULATION
@@ -58,20 +58,16 @@
                     ---------------
                     DIRECTION DU RECOUVREMENT
                     ---------------
-
-                    <br />
                 </pre>
 
             </td>
             <td align="center">
                 <img src="../public/ARTLogo_0.jpg" alt="Logo" width="64" class="logo"/>
             </td>
-            <td align="right" style="width: 40%;">
-
-                <h3 style="text-align: center">REPUBLIC OF CAMEROON</h3>
-                <pre style="text-align:center">
-
-                    Peace - Work -Fatherland
+            <td align="right" style="width: 40%;  text-align:center;">
+                <h3>REPUBLIC OF CAMEROON</h3>
+                <pre>
+                    Peace - Work - Fatherland
                     ---------------
                     TELECOMMUNICATIONS
                     REGULATORY BOARD
@@ -81,7 +77,6 @@
                 </pre>
             </td>
         </tr>
-
     </table>
 </div>
 

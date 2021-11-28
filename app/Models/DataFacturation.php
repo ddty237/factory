@@ -20,7 +20,7 @@ class DataFacturation extends Model
         return $this->belongsTo(Client::class);
     }
 
-    public function produit()
+    public function product()
     {
         return $this->belongsTo(Product::class);
     }
