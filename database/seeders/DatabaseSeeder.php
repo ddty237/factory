@@ -14,29 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /*DB::table('villes')->insert([
-            ['name' => 'Centre'],
-            ['name' => 'Sud'],
-            ['name' => 'Est'],
-            ['name' => 'Ouest'],
-            ['name' => 'Nord-ouest'],
-            ['name' => 'Sud-ouest'],
-            ['name' => 'Adamaoua'],
-            ['name' => 'Extrème-nord'],
-            ['name' => 'Nord'],
-            ['name' => 'Littoral']
-        ]);*/
-
         DB::table('delegations')->insert([
-            ['name' => 'Délégation Régionale de Yaoundé'],
-            ['name' => 'Délégation Régionale de Douala'],
-            ['name' => 'Délégation Régionale de Garoua'],
-            ['name' => 'Délégation Régionale de Bamenda']
+            ['name' => 'Délégation Régionale de Yaoundé','nickname' => 'Y'],
+            ['name' => 'Délégation Régionale de Douala','nickname' => 'D'],
+            ['name' => 'Délégation Régionale de Garoua','nickname' => 'G'],
+            ['name' => 'Délégation Régionale de Bamenda','nickname' => 'B']
         ]);
 
        /*
 
-        , , , , , , , , , Messondo, Mfou, Minta, Monatélé
+        Messondo, Mfou, Minta, Monatélé
         N
         Nanga-Eboko, Ndikiniméki, Ngambè-Tikar, Ngog-Mapubi, Ngomedzap, Ngoro, Ngoumou, Nguibassal, Nitoukou, Nkolafamba, Nkolmetet, Nkoteng, Nsem, Ntui
         O
@@ -132,6 +119,12 @@ class DatabaseSeeder extends Seeder
             ['name' => 'DO'],
             ['name' => 'DREC'],
             ['name' => 'DR']
+        ]);
+
+        DB::table('status')->insert([
+            ['name' => 'Non payée'],
+            ['name' => 'Payée'],
+            ['name' => 'annulée']
         ]);
     }
 }

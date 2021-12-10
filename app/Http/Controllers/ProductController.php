@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Direction;
 use App\Models\Product;
+use App\Models\Direction;
 use App\Models\SubProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -39,6 +40,7 @@ class ProductController extends Controller
             'compte_collectif' => $request->compte_collectif,
             'codification' => $request->codification,
             'direction_id' => $request->direction,
+            'user_id' => Auth::user()->id,
             'have_sub_categorie' => $request->boolean('haveSubCategorie')
         ]);
 
@@ -73,6 +75,7 @@ class ProductController extends Controller
             'compte_collectif' => $request->compte_collectif,
             'codification' => $request->codification,
             'direction_id' => $request->direction,
+            'user_id' => Auth::user()->id,
             'have_sub_categorie' => $request->boolean('haveSubCategorie')
         ]);
 

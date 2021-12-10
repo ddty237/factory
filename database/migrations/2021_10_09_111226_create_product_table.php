@@ -21,6 +21,7 @@ class CreateProductTable extends Migration
             $table->string('compte_collectif');
             $table->bigInteger('direction_id');
             $table->boolean('have_sub_categorie');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

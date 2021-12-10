@@ -55,25 +55,25 @@
         </div>
         <div class="mt-4 px-20">
             <x-label for="reference_contrat" :value="__('Reference de contrat')" />
-            <x-input wire:model.lazy="reference" class="block mt-1 w-full{{ $errors->has('reference_contrat') ? ' border-red-500' : '' }}" type="text" name="reference_contrat" :value="old('reference_titre')"/>
+            <x-input wire:model.lazy="reference" class="block mt-1 w-full{{ $errors->has('reference_contrat') ? ' border-red-500' : '' }}" type="text" name="reference_contrat"/>
             @error('reference_contrat')
                 <div class="mt-1 font-semibold text-red-500">
                     {{$errors->first('reference_contrat')}}
                 </div>
             @enderror
         </div>
-        <div class="px-20 mt-4">
-            <x-label for="scan_contrat" :value="__('Scan contrat')" />
-            <input class="px-4 py-4 rounded-lg border-dashed border-2 border-gray-200 bg-white h-full w-full" type="file" name="scan_contrat">
-            <div class="flex justify-between items-center text-gray-400"> <span>Accepted file type:.doc only</span> <span class="flex items-center "><i class="fa fa-lock mr-1"></i> secure</span> </div>
+        <div class="mt-4 px-20">
+            <x-label for="observation_general" :value="__('Observation générale')" />
+            <textarea wire:model.lazy="general_observation" class="w-full text-gray-700 border rounded-lg focus:outline-none {{ $errors->has('general_observation') ? ' border-red-500' : '' }}" rows="4" name="general_observation"></textarea>
+            @error('general_observation')
+                <div class="mt-1 font-semibold text-red-500">
+                    {{$errors->first('general_observation')}}
+                </div>
+            @enderror
         </div>
-        <div class="px-20 mt-4">
-            <x-label for="scan_donnee" :value="__('Scan donnée')" />
-            <input class="px-4 py-4 rounded-lg border-dashed border-2 border-gray-200 bg-white h-full w-full" type="file" name="scan_donnee">
-            <div class="flex justify-between items-center text-gray-400"> <span>Accepted file type:.doc only</span> <span class="flex items-center "><i class="fa fa-lock mr-1"></i> secure</span> </div>
-        </div>
+
         <div class="flex items-center justify-end mt-4 px-20 mb-6">
-            <x-button class="ml-4" wire:submit="save">
+            <x-button class="ml-4" wire:submit.prevent="save">
                 {{ __('Enregistrer') }}
             </x-button>
         </div>

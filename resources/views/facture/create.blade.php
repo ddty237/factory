@@ -19,7 +19,7 @@
             <div class="bg-white overflow-auto shadow-sm sm:rounded-lg">
                 <div class=" bg-white border-gray-200 px-3 pt-16 pb-6">
                     <p class="text-2xl text-center mt-4 mb-4">
-                        Reporting des données de facturation
+                        Création d'une e-facture
                     </p>
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -37,10 +37,7 @@
                               Montant
                             </th>
                             <th scope="col" class="relative px-6 py-3">
-                                <span class="sr-only">document</span>
-                              </th>
-                            <th scope="col" class="relative px-6 py-3">
-                              <span class="sr-only">Edit</span>
+                              <span class="sr-only">Facture</span>
                             </th>
                           </tr>
                         </thead>
@@ -70,10 +67,7 @@
                                   {{ $data->montant_facture }}
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="{{route('data.createFile',['dataFacturation' => $data->id])}}" class="text-indigo-600 hover:text-indigo-900">Lier des documents</a>
-                              </td>
-                              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                  <a href=" {{route('facture.generer',['data' => $data->id])}} " class="text-indigo-600 hover:text-indigo-900">Générer une e-facture</a>
                               </td>
                             </tr>
                           @endforeach

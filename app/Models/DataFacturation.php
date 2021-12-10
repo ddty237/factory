@@ -6,13 +6,14 @@ use App\Models\Client;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class DataFacturation extends Model
 {
     protected $table = "data_facturation";
     use HasFactory;
 
-    protected $fillable = ['client_id','product_id','montant_facture','observation_general'];
+    protected $fillable = ['client_id','product_id','montant_facture','observation_general','reference_contrat','scan_donnee','scan_contrat','user_id'];
     protected $guarded = [];
 
     public function client()
@@ -28,5 +29,10 @@ class DataFacturation extends Model
     public function subProduct()
     {
         return $this->belongsTo(SubProduct::class);
+    }
+
+    public function observations()
+    {
+        return $this->hasMany(SubproductObservation::class);
     }
 }

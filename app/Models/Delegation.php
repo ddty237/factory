@@ -11,6 +11,8 @@ class Delegation extends Model
     protected $table = "delegations";
     use HasFactory;
 
+    protected $fillable = ['name','nickname'];
+
     public function villes()
     {
         return $this->hasMany(Ville::class);

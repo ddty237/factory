@@ -16,10 +16,11 @@ class CreateFactureTable extends Migration
         Schema::create('factures', function (Blueprint $table) {
             $table->id();
             $table->string('numero_facture');
-            $table->string('arriere');
-            $table->string('periode');
-            $table->string('observation');
-
+            $table->string('data_facturation_id');
+            $table->string('arriere')->nullable();
+            $table->string('periode')->nullable();
+            $table->text('observation')->nullable();
+            $table->integer('status_id')->nullable();
             $table->timestamps();
         });
     }

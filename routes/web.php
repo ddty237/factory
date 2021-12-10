@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Routing\RouteUri;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubProductController;
 use App\Http\Controllers\BillingDataController;
+use App\Http\Controllers\FactureController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +45,10 @@ Route::resource('produit',ProductController::class);
 Route::resource('subProduct',SubProductController::class);
 //Billing data
 Route::resource('billingData',BillingDataController::class);
-
+Route::get('billingData/{dataFacturation}/createFile',[BillingDataController::class,'createFile'])->name('data.createFile');
+Route::post('billingData/{dataFacturation}/createFile',[BillingDataController::class,'storeFile'])->name('data.storeFile');
+//e-facture
+Route::resource('facture',FactureController::class);
+Route::get('facture/{data}/generer',[FactureController::class,'genererFacture'])->name('facture.generer');
 
 require __DIR__.'/auth.php';

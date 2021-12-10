@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('billingData.index')" :active="request()->routeIs('billingData.*')">
                         {{ __('Données de facturation') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('facture.index')" :active="request()->routeIs('facture.*')">
+                        {{ __('e-facturation') }}
+                    </x-nav-link>
                 </div>
             </div>
 

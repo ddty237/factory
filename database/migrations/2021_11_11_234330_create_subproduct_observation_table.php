@@ -18,8 +18,8 @@ class CreateSubproductObservationTable extends Migration
             $table->BigInteger('product_sub_categorie_id')->nullable();
             $table->BigInteger('product_id')->nullable();
             $table->BigInteger('data_facturation_id')->nullable();
-            $table->string('observation');
-            $table->bigInteger('montant');
+            $table->string('observation')->nullable();
+            $table->bigInteger('montant')->nullable();
             $table->timestamps();
 
         });

@@ -52,10 +52,10 @@
                                 </div>
                             </div>
                             <div class="px-20 mt-4">
-                                <a class="text-indigo-800" href="#" >Cliquez ici pour voir le scan du contrat</a>
+                                <a class="text-indigo-800" href="{{$data->scan_contrat ? asset("storage/". substr($data->scan_contrat,7)) : '' }}" >Cliquez ici pour voir le scan du contrat</a>
                             </div>
                             <div class="px-20 mt-4">
-                                <a class="text-indigo-800" href="#" >Cliquez ici pour voir le scan de la donnée de facturation</a>
+                                <a class="text-indigo-800" href="{{$data->scan_donnee ? asset("storage/". substr($data->scan_donnee,7)) : '' }}" >Cliquez ici pour voir le scan de la donnée de facturation</a>
                             </div>
                             <div class="flex items-center justify-end mt-4 px-20 mb-6">
                                 <x-button class="ml-4">
