@@ -22,6 +22,7 @@ class CreateDataFacturationTable extends Migration
             $table->string('reference_contrat')->nullable();
             $table->string('scan_contrat')->nullable();
             $table->string('scan_donnee')->nullable();
+            $table->boolean('invoice_generate')->default(false);
             $table->integer('user_id');
             $table->timestamps();
         });

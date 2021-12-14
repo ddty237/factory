@@ -8,25 +8,35 @@ use App\Models\DataFacturation;
 use NumberToWords\NumberToWords;
 use Illuminate\Support\Facades\DB;
 use App\Models\SubproductObservation;
+use Dflydev\DotAccessData\Data;
 
 class FactureController extends Controller
 {
     public function index()
     {
-        // create the number to words "manager" class
-        //$numberToWords = new NumberToWords();
+        $factures = Facture::get()->map(function($item, $key){
+            $data = [
+                'id' => $item->id,
+                'numero_facture' => $item->numero_facture,
+                'client' => $item->data_facturation->map(function($client,$key){
+                    $data = ['name' => $client->client->designation];
+                    return $data;
+                }),
+                'produit' => $item->data_facturation->map(function($produit,$key){
+                    $data = ['name' => $produit->product->designation];
+                    return $data;
+                }),
+                'status' => $item->status->name
+            ];
+            return $data;
+        });
 
-        // build a new number transformer using the RFC 3066 language identifier
-        /*$numberTransformer = $numberToWords->getNumberTransformer('fr');
-        $f = $numberTransformer->toWords(51200);
-        dd($f);*/
-        $factures = Facture::all();
         return view('facture.index', compact('factures'));
     }
 
     public function create()
     {
-        $datas = DataFacturation::all();
+        $datas = DataFacturation::where('invoice_generate',false)->get();
         return view('facture.create',compact('datas'));
     }
 
@@ -51,35 +61,44 @@ class FactureController extends Controller
             return $data;
         });
 
-        $nomClient = $donnees[0]['client'];
         $anneeEnCours = date('Y');
         $nomProduit = $donnees[0]['product'];
         $delegation = $donnees[0]['delegation'];
-        $montantTotal = $donnees[0]['montant_total'];
-        $observations = $donnees[0]['observations'];
         $direction = $donnees[0]['direction'];
         $subYear = substr(strval($anneeEnCours),2);
 
-        $ids = DB::table('factures')->latest()->first('id');
-        if($ids === NULL){
-            $latest = 1;
-        }else{
-            $latest = $ids->id + 1;
-        }
-        $numeroFacture = $subYear.'-'.$nomProduit.'/'.$delegation.'/'.$latest;
+        $ids = DB::table('factures')->latest()->first('numero_facture');
 
-        //dd($numeroFacture);
+        if($ids != null) {
+            if (str_ends_with($ids->numero_facture, 'bis')) {
+                $new_ids = substr(strrev($ids->numero_facture), 3);
+                $final_ids = strrev(substr($new_ids, 0, 3));
+            }else{
+                $rev_ids = strrev($ids->numero_facture);
+                $final_ids = strrev(substr($rev_ids, 0, 3));
+            }
+        }else{
+            $rev_ids = null;
+            $final_ids = NULL;
+        }
+
+        if($final_ids === NULL){
+            $latest = str_pad(1,3,'0',STR_PAD_LEFT);
+        }else{
+            $latest = $final_ids + 1;
+            $latest = str_pad($latest,3,'0',STR_PAD_LEFT);
+        }
+
+        $numeroFacture = $subYear.'-'.$nomProduit.'/'.$delegation.'/'.$latest;
 
         Facture::create([
             'numero_facture' => $numeroFacture,
             'data_facturation_id' => $data,
             'periode' => date('M-Y'),
             'arriere' => '',
-            'status_id' => 0,
+            'status_id' => 1,
         ]);
 
-        // generer une facture sur un template PDF
-        // si le produit appartient a la direction des frequences on aura une facture sur deux pages
         if($direction == "Direction de la Gestion des Fréquences" || $nomProduit == 'RARN'){
             $numeroFacture = $numeroFacture.'bis';
             Facture::create([
@@ -87,9 +106,14 @@ class FactureController extends Controller
                 'data_facturation_id' => $data,
                 'periode' => date('M-Y'),
                 'arriere' => '',
-                'status_id' => 0,
+                'status_id' => 1,
             ]);
         }
+
+        DataFacturation::where('id',$data)->update([
+            'invoice_generate' => true
+        ]);
+
         return back();
     }
 
@@ -103,9 +127,85 @@ class FactureController extends Controller
         //
     }
 
-    public function numberBill($id)
+    public function exportFacture(Facture $data)
     {
-        $donnee = DataFacturation::findOrfail($id);
+        $donnees = DataFacturation::where('id',$data->data_facturation_id)->get()->map(function($item, $key){
+            $data = [
+                'client' => $item->client->designation,
+                'code_postal' => $item->client->code_postal,
+                'ville' => $item->client->ville->name,
+                'reference_contrat' => $item->reference_contrat,
+                'delegation' => $item->client->ville->delegation->name,
+                'abbr_delegation' => $item->client->ville->delegation->nickname,
+                'product_name' => $item->product->designation,
+                'product_description' => $item->product->description,
+                'imputation_budgetaire' => $item->product->codification,
+                'compte_collectif' => $item->product->compte_collectif,
+                'compte_auxilliaire' => $item->client->compte_auxilliaire,
+                'direction' => $item->product->direction->name,
+                'created_at' => $item->created_at->format('d-m-Y'),
+                'montant_total' => $item->montant_facture,
+                'observation_general' => $item->observation_general,
+                'observations' => $item->observations->map(function($obs, $key){
+                    $data = [
+                        'subproduct_name' => $obs->subProduct->product_description,
+                        'observation' => $obs->observation,
+                        'montant' => $obs->montant
+                    ];
+                    return $data;
+                })
+            ];
+            return $data;
+        });
+        $numberToWords = new NumberToWords();
+        $numberTransformer = $numberToWords->getNumberTransformer('fr');
+        $montant_chiffre = $numberTransformer->toWords($donnees[0]['montant_total']);
 
+        //prévisualiser le PDF
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('facture.invoice',['facture' =>$data,'donnees' => $donnees, 'montant_chiffre' => $montant_chiffre]);
+
+        return $pdf->stream();
+    }
+
+    public function downloadFacture(Facture $data)
+    {
+        $donnees = DataFacturation::where('id',$data->data_facturation_id)->get()->map(function($item, $key){
+            $data = [
+                'client' => $item->client->designation,
+                'code_postal' => $item->client->code_postal,
+                'ville' => $item->client->ville->name,
+                'reference_contrat' => $item->reference_contrat,
+                'delegation' => $item->client->ville->delegation->name,
+                'abbr_delegation' => $item->client->ville->delegation->nickname,
+                'product_name' => $item->product->designation,
+                'product_description' => $item->product->description,
+                'imputation_budgetaire' => $item->product->codification,
+                'compte_collectif' => $item->product->compte_collectif,
+                'compte_auxilliaire' => $item->client->compte_auxilliaire,
+                'direction' => $item->product->direction->name,
+                'created_at' => $item->created_at->format('d-m-Y'),
+                'montant_total' => $item->montant_facture,
+                'observation_general' => $item->observation_general,
+                'observations' => $item->observations->map(function($obs, $key){
+                    $data = [
+                        'subproduct_name' => $obs->subProduct->product_description,
+                        'observation' => $obs->observation,
+                        'montant' => $obs->montant
+                    ];
+                    return $data;
+                })
+            ];
+            return $data;
+        });
+        $numberToWords = new NumberToWords();
+        $numberTransformer = $numberToWords->getNumberTransformer('fr');
+        $montant_chiffre = $numberTransformer->toWords($donnees[0]['montant_total']);
+
+        //télécharger le PDF
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('facture.invoice',['facture' =>$data,'donnees' => $donnees, 'montant_chiffre' => $montant_chiffre]);
+
+        return $pdf->download(str_pad($data->id,3,'0',STR_PAD_LEFT).'.pdf');
     }
 }

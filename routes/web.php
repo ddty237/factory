@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\FactureController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubProductController;
 use App\Http\Controllers\BillingDataController;
-use App\Http\Controllers\FactureController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,5 +50,6 @@ Route::post('billingData/{dataFacturation}/createFile',[BillingDataController::c
 //e-facture
 Route::resource('facture',FactureController::class);
 Route::get('facture/{data}/generer',[FactureController::class,'genererFacture'])->name('facture.generer');
-
+Route::get('facture/{data}/export',[FactureController::class,'exportFacture'])->name('facture.export');
+Route::get('facture/{data}/download',[FactureController::class,'downloadFacture'])->name('facture.download');
 require __DIR__.'/auth.php';

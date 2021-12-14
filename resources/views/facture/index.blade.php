@@ -28,13 +28,13 @@
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                               N° facture
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                               Nom du client
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              Délégation
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Nom du produit
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                               Statut
                             </th>
                             <th scope="col" class="relative px-6 py-3">
@@ -48,30 +48,32 @@
                               <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                   <div class="text-sm font-medium text-gray-900">
-                                      <a class='text-indigo-700' href="{{ route('facture.show',['facture' => $facture->id]) }}">
-
+                                      <a class='text-indigo-700' href="{{ route('facture.export',['data' => $facture['id']]) }}">
+                                            {{$facture['numero_facture']}}
                                       </a>
                                   </div>
                                 </div>
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">
-
+                                <div class="text-center text-sm text-gray-900">
+                                    {{$facture['client'][0]['name'] }}
                                 </div>
                               </td>
                               <td class="px-6 py-3 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">
-
+                                <div class="text-center text-sm text-gray-900">
+                                    {{$facture['produit'][0]['name'] }}
                                 </div>
                               </td>
-                              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-
+                              <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-300 text-green-800">
+                                  {{$facture['status']}}
+                                </span>
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                   <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Export</a>
+                                  <a href="{{ route('facture.download',['data' => $facture['id']]) }}" class="text-indigo-600 hover:text-indigo-900">Export</a>
                               </td>
                             </tr>
                           @endforeach

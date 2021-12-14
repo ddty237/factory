@@ -12,6 +12,16 @@ class Product extends Model
     use HasFactory;
     protected $fillable = ['designation','description','compte_collectif','codification','direction_id','have_sub_categorie','user_id'];
 
+    public function getDesignationAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
+    public function setDesignationAttribute($value)
+    {
+        $this->attributes['designation'] = strtoupper($value);
+    }
+
     public function direction()
     {
         return $this->belongsTo(Direction::class);

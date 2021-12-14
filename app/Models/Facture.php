@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Status;
+use App\Models\DataFacturation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -15,6 +16,11 @@ class Facture extends Model
 
     public function status()
     {
-        return $this->hasOne(Status::class);
+        return $this->hasOne(Status::class,'id','status_id');
+    }
+
+    public function data_facturation()
+    {
+        return $this->hasMany(DataFacturation::class,'id','data_facturation_id');
     }
 }
