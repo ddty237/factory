@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RarnProduct;
 use Illuminate\Http\Request;
 use App\Models\DataFacturation;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +12,17 @@ class BillingDataController extends Controller
 {
     public function index()
     {
-        $datas = DataFacturation::all();
+        $datas = DataFacturation::get()->map(function($item, $key){
+            $data = [
+                'id' => $item->id,
+                'delegation' => $item->client->ville->delegation->name,
+                'client' => $item->client->designation,
+                'produit' => $item->product->name,
+                'montant' => $item->montant_facture,
+            ];
+            return $data;
+        });
+
         return view('BillingData.index', compact('datas'));
     }
 
@@ -22,17 +33,24 @@ class BillingDataController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'client_id' => ['required'],
-            'product_id' => ['required'],
-            'observation_general' => ['nullable'],
-        ]);
+        //
     }
 
     public function show($id)
     {
         $data = DataFacturation::findOrfail($id);
-        return view('BillingData.show', compact('data'));
+        $products = RarnProduct::where('data_facturation_id',$data->id)->get()->map(function($item, $key){
+            $data = [
+                'id' => $item->id,
+                'bloc_numero' => $item->bloc_numero,
+                'quantite' => $item->quantites,
+                'format' => $item->nameRarnProduct->format,
+                'name' => $item->nameRarnProduct->type_numero
+            ];
+            return $data;
+        });
+
+        return view('BillingData.show', compact('data','products'));
     }
 
     public function edit()

@@ -6,6 +6,7 @@ use App\Http\Controllers\FactureController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubProductController;
 use App\Http\Controllers\BillingDataController;
+use App\Http\Controllers\RecoveryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,21 +36,30 @@ Route::get('/accueil', function() {
 });
 
 //client
-Route::resource('client', ClientController::class);
-Route::get('client/{client}/export',[ClientController::class,'exportClient'])->name('client.export');
-Route::get('client/{client}/download', [ClientController::class,'downloadClient'])->name('client.download');
+Route::resource('client', ClientController::class)->middleware(['auth']);
+//Route::get('client/{client}/export',[ClientController::class,'exportClient'])->middleware(['auth'])->name('client.export');
+Route::get('client/{client}/download', [ClientController::class,'downloadClient'])->middleware(['auth'])->name('client.download');
+
+//client import and export
+Route::get('export/client',[ClientController::class,'export'])->middleware(['auth'])->name('client.export');
+
+Route::get('import/client',[ClientController::class,'showImport'])->middleware(['auth'])->name('client.import');
+Route::post('import/client',[ClientController::class,'import'])->middleware(['auth'])->name('client.import');
 
 //product
-Route::resource('produit',ProductController::class);
+Route::resource('produit',ProductController::class)->middleware(['auth']);
 //subProduct
-Route::resource('subProduct',SubProductController::class);
+Route::resource('subProduct',SubProductController::class)->middleware(['auth']);
 //Billing data
-Route::resource('billingData',BillingDataController::class);
-Route::get('billingData/{dataFacturation}/createFile',[BillingDataController::class,'createFile'])->name('data.createFile');
-Route::post('billingData/{dataFacturation}/createFile',[BillingDataController::class,'storeFile'])->name('data.storeFile');
+Route::resource('billingData',BillingDataController::class)->middleware(['auth']);
+Route::get('billingData/{dataFacturation}/createFile',[BillingDataController::class,'createFile'])->middleware(['auth'])->name('data.createFile');
+Route::post('billingData/{dataFacturation}/createFile',[BillingDataController::class,'storeFile'])->middleware(['auth'])->name('data.storeFile');
 //e-facture
-Route::resource('facture',FactureController::class);
-Route::get('facture/{data}/generer',[FactureController::class,'genererFacture'])->name('facture.generer');
-Route::get('facture/{data}/export',[FactureController::class,'exportFacture'])->name('facture.export');
-Route::get('facture/{data}/download',[FactureController::class,'downloadFacture'])->name('facture.download');
+Route::resource('facture',FactureController::class)->middleware(['auth']);
+Route::get('facture/{data}/generer',[FactureController::class,'genererFacture'])->middleware(['auth'])->name('facture.generer');
+Route::get('facture/{data}/export',[FactureController::class,'exportFacture'])->middleware(['auth'])->name('facture.export');
+Route::get('facture/{data}/download',[FactureController::class,'downloadFacture'])->middleware(['auth'])->name('facture.download');
+//recouvrement
+Route::resource('recovery',RecoveryController::class)->middleware(['auth']);
+
 require __DIR__.'/auth.php';

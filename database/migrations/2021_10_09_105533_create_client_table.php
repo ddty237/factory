@@ -24,7 +24,7 @@ class CreateClientTable extends Migration
             $table->integer('phone');
             $table->integer('secondary_phone')->nullable();
             $table->string('website')->nullable();
-            $table->string('reference_titre')->unique();
+            $table->string('reference_titre');
             $table->string('email')->nullable();
             $table->string('compte_auxilliaire')->nullable();
             $table->bigInteger('categorie_id');

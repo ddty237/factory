@@ -16,13 +16,13 @@ class CreateDataFacturationTable extends Migration
         Schema::create('data_facturation', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('client_id');
-            $table->bigInteger('product_id');
             $table->string('observation_general')->nullable();
             $table->bigInteger('montant_facture');
             $table->string('reference_contrat')->nullable();
             $table->string('scan_contrat')->nullable();
             $table->string('scan_donnee')->nullable();
             $table->boolean('invoice_generate')->default(false);
+            $table->bigInteger('recap_products_id');
             $table->integer('user_id');
             $table->timestamps();
         });

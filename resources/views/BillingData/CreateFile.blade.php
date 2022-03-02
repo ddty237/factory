@@ -26,19 +26,24 @@
                     <form method="POST" action="{{route('data.storeFile',['dataFacturation' => $data->id])}}" enctype="multipart/form-data">
                         @csrf
                         <div class="px-20">
-                            <x-label for="scan_donnee" :value="__('Scan Donnée')" />
+                            <label class="block font-medium text-sm text-gray-700 my-1" for="scan_donnee">
+                                Scan de la donnée
+                            </label>
+
                             <input class="px-4 py-4 rounded-lg border-dashed border-2 border-gray-200 bg-white h-full w-full" type="file" name="scan_donnee">
                             <div class="flex justify-between items-center text-gray-400"> <span>Accepted file type:.doc only</span> <span class="flex items-center "><i class="fa fa-lock mr-1"></i> secure</span> </div>
                         </div>
                         <div class="px-20 mt-4">
-                            <x-label for="scan_contrat" :value="__('Scan contrat')" />
+                            <label class="block font-medium text-sm text-gray-700 my-1" for="scan_contrat"/>
+                                Scan du contrat
+                            </label>
                             <input class="px-4 py-4 rounded-lg border-dashed border-2 border-gray-200 bg-white h-full w-full" type="file" name="scan_contrat">
                             <div class="flex justify-between items-center text-gray-400"> <span>Accepted file type:.doc only</span> <span class="flex items-center "><i class="fa fa-lock mr-1"></i> secure</span> </div>
                         </div>
-                        <div class="flex items-center justify-end mt-4 px-20 mb-6">
-                            <x-button class="ml-4">
-                                {{ __('Enregistrer le client') }}
-                            </x-button>
+                        <div class="flex items-center justify-end mt-4 px-20 mb-6 text-white py-2 bg-gray-900 rounded-lg">
+                            <button class="ml-4">
+                                {{ __('Enregistrer les fichiers') }}
+                            </button>
                         </div>
 
                     </form>

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Ville;
 use App\Models\Categorie;
-use App\Models\Delegation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -18,6 +17,7 @@ class Client extends Model
         'code_postal',
         'adresse',
         'phone',
+        'email',
         'compte_auxilliaire',
         'categorie_id',
         'scan_titre',
@@ -35,10 +35,5 @@ class Client extends Model
     public function ville()
     {
         return $this->belongsTo(Ville::class);
-    }
-
-    public function dataBilling()
-    {
-        return $this->hasMany(BillingDataController::class);
     }
 }

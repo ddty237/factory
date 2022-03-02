@@ -42,8 +42,10 @@
                                 </div>
                             </div>
                             <div class="px-20 mt-4">
-                                <div class="font-semibold uppercase text-xl text-gray-700">Validité :
-                                    <span class="leading-4 text-normal text-lg text-gray-900">{{$data->create_at}}</span>
+                                <div class="font-semibold uppercase text-xl text-gray-700">Sous-produit : <br>
+                                @foreach ($products as $product)
+                                    <span class="leading-4 text-normal text-lg text-gray-900">Numéro : {{$product['bloc_numero']}} - Format : {{$product['format']}} ( {{$product['name']}} )</span><br>
+                                @endforeach
                                 </div>
                             </div>
                             <div class="px-20 mt-4">
@@ -58,15 +60,14 @@
                                 <a class="text-indigo-800" href="{{$data->scan_donnee ? asset("storage/". substr($data->scan_donnee,7)) : '' }}" >Cliquez ici pour voir le scan de la donnée de facturation</a>
                             </div>
                             <div class="flex items-center justify-end mt-4 px-20 mb-6">
-                                <x-button class="ml-4">
+                                <button class="ml-4 px-4 py-2 bg-gray-900 rounded-lg text-white">
                                     <a href="{{ route('billingData.edit',['billingDatum' => $data->id]) }}">
-                                        {{ __('Modifier le client') }}
+                                        {{ __('Modifier la donnée de facturation') }}
                                     </a>
-                                </x-button>
+                                </button>
                             </div>
                     </div>
             </div>
         </div>
     </div>
-
 </x-app-layout>

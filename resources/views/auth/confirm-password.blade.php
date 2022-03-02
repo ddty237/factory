@@ -18,7 +18,9 @@
 
             <!-- Password -->
             <div>
-                <x-label for="password" :value="__('Password')" />
+                <label class="block font-medium text-sm text-gray-700" for="password">
+                    Password
+                </label>
 
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
@@ -27,9 +29,9 @@
             </div>
 
             <div class="flex justify-end mt-4">
-                <x-button>
+                <button class="text-white px-4 py-2 bg-gray-900 rounded-lg">
                     {{ __('Confirm') }}
-                </x-button>
+                </button>
             </div>
         </form>
     </x-auth-card>

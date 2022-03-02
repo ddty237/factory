@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ClientsExport;
 use App\Models\Ville;
 use App\Models\Client;
-use Barryvdh\DomPDF\PDF as PDF;
 use App\Models\Categorie;
-use Facade\Ignition\Exceptions\ViewException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClientController extends Controller
 {
@@ -34,8 +34,9 @@ class ClientController extends Controller
             'designation' => ['required', 'string'],
             'ville' => ['required', 'integer'],
             'phone' => ['required', 'numeric'],
-            'compte_auxilliaire' => ['required', 'string'],
-            'reference_titre' => ['required', 'string', 'unique:clients'],
+            'compte_auxilliaire' => ['required', 'string', 'unique:clients'],
+            'reference_titre' => ['required', 'string'],
+            'email' => ['nullable', 'string', 'email', 'max:255', 'unique:clients']
         ]);
 
         $DirName = 'titreClient';
@@ -49,6 +50,7 @@ class ClientController extends Controller
             'code_postal' => $request->code_postal,
             'adresse' => $request->adresse,
             'phone' => $request->phone,
+            'email' => $request->email,
             'secondary_phone' => $request->secondary_phone,
             'compte_auxilliaire' => $request->compte_auxilliaire,
             'categorie_id' => $request->categorie,
@@ -83,6 +85,7 @@ class ClientController extends Controller
             'phone' => ['required', 'numeric'],
             'compte_auxilliaire' => ['required', 'string'],
             'reference_titre' => ['required', 'string'],
+            'email' => ['nullable', 'string', 'email', 'max:255']
         ]);
 
         Storage::delete([$client->scan_titre, '']);
@@ -97,6 +100,7 @@ class ClientController extends Controller
             'ville_id' => $request->ville,
             'code_postal' => $request->code_postal,
             'adresse' => $request->adresse,
+            'email' => $request->email,
             'phone' => $request->phone,
             'secondary_phone' => $request->secondary_phone,
             'compte_auxilliaire' => $request->compte_auxilliaire,
@@ -141,6 +145,21 @@ class ClientController extends Controller
         $pdf = app('dompdf.wrapper');
         $pdf->loadView('client.invoice',['client'=>$client]);
         return $pdf->download('fiche-client.pdf');
+    }
+
+    public function import()
+    {
+        dd('Importing...');
+    }
+
+    public function showImport()
+    {
+        return view('client.import');
+    }
+
+    public function export()
+    {
+        return Excel::download(new ClientsExport, 'clients.xlsx');
     }
 
 }

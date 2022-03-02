@@ -52,7 +52,7 @@ class ProductSelectSubProduct extends Component
                     'product_sub_categorie_id' => $subproducts[$i]->id,
                     'product_id' => $this->produitId,
                     'observation' => $datas[$i]['observation'] ?? NULL,
-                    'montant' => $datas[$i]['montant'],
+                    'montant' => $datas[$i]['montant'] ?? 0,
                     'data_facturation_id' => $produitData->id
                 ]);
             }
@@ -81,7 +81,7 @@ class ProductSelectSubProduct extends Component
         if(!$this->datas == NULL){
             if(!$this->datas == NULL){
                 for($i = 0; $i < count($this->datas); $i++){
-                    $total += intval($this->datas[$i]['montant']);
+                    $total += intval($this->datas[$i]['montant'] ?? 0);
                 }
                 $this->montantTotal = intval($total);
             }else{

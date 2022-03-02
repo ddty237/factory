@@ -79,11 +79,11 @@
                                 <a class="text-indigo-800" href="{{$client->scan_titre ? asset("storage/". substr($client->scan_titre,7)) : '' }}" >Cliquez ici pour voir le scan du contrat</a>
                             </div>
                             <div class="flex items-center justify-end mt-4 px-20 mb-6">
-                                <x-button class="ml-4">
+                                <button class="text-white px-4 py-2 bg-gray-900 rounded-lg ml-4">
                                     <a href="{{ route('client.edit',['client' => $client->id]) }}">
                                         {{ __('Modifier le client') }}
                                     </a>
-                                </x-button>
+                                </button>
                             </div>
                     </div>
             </div>

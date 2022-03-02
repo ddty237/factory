@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Facture;
+use App\Models\RarnProduct;
 use Illuminate\Http\Request;
 use App\Models\DataFacturation;
 use NumberToWords\NumberToWords;
 use Illuminate\Support\Facades\DB;
-use App\Models\SubproductObservation;
-use Dflydev\DotAccessData\Data;
 
 class FactureController extends Controller
 {
@@ -23,7 +22,7 @@ class FactureController extends Controller
                     return $data;
                 }),
                 'produit' => $item->data_facturation->map(function($produit,$key){
-                    $data = ['name' => $produit->product->designation];
+                    $data = ['name' => $produit->product->name];
                     return $data;
                 }),
                 'status' => $item->status->name
@@ -46,7 +45,7 @@ class FactureController extends Controller
             $data = [
                 'client' => $item->client->designation,
                 'delegation' => $item->client->ville->delegation->nickname,
-                'product' => $item->product->designation,
+                'product' => $item->product->name,
                 'direction' => $item->product->direction->name,
                 'montant_total' => $item->montant_facture,
                 'observation_general' => $item->observation_general,
@@ -99,7 +98,7 @@ class FactureController extends Controller
             'status_id' => 1,
         ]);
 
-        if($direction == "Direction de la Gestion des Fréquences" || $nomProduit == 'RARN'){
+        /*if($direction == "Direction de la Gestion des Fréquences" || $nomProduit == 'RARN'){
             $numeroFacture = $numeroFacture.'bis';
             Facture::create([
                 'numero_facture' => $numeroFacture,
@@ -108,7 +107,7 @@ class FactureController extends Controller
                 'arriere' => '',
                 'status_id' => 1,
             ]);
-        }
+        }*/
 
         DataFacturation::where('id',$data)->update([
             'invoice_generate' => true
@@ -133,37 +132,52 @@ class FactureController extends Controller
             $data = [
                 'client' => $item->client->designation,
                 'code_postal' => $item->client->code_postal,
+                'telephone' => $item->client->phone,
+                'telephone2' => $item->client->secondary_phone,
                 'ville' => $item->client->ville->name,
                 'reference_contrat' => $item->reference_contrat,
                 'delegation' => $item->client->ville->delegation->name,
                 'abbr_delegation' => $item->client->ville->delegation->nickname,
-                'product_name' => $item->product->designation,
+                'product_name' => $item->product->name,
                 'product_description' => $item->product->description,
-                'imputation_budgetaire' => $item->product->codification,
+                'imputation_budgetaire' => $item->product->imputation_budgetaire,
                 'compte_collectif' => $item->product->compte_collectif,
                 'compte_auxilliaire' => $item->client->compte_auxilliaire,
                 'direction' => $item->product->direction->name,
                 'created_at' => $item->created_at->format('d-m-Y'),
                 'montant_total' => $item->montant_facture,
                 'observation_general' => $item->observation_general,
-                'observations' => $item->observations->map(function($obs, $key){
+                'observations' => $item->rarns->map(function($obs, $key){
                     $data = [
-                        'subproduct_name' => $obs->subProduct->product_description,
-                        'observation' => $obs->observation,
-                        'montant' => $obs->montant
+                        'subproduct_name' => $obs->bloc_numero,
+                        'quantite' => $obs->quantites,
+                        'format' => $obs->nameRarnProduct->format,
+                        'type' => $obs->nameRarnProduct->type_numero,
+                        'montant' => $obs->nameRarnProduct->redevance_attribution_annuel,
+                    ];
+                    return $data;
+                }),
+                'frais' => $item->frais->map(function($frais, $key){
+                    $data = [
+                        'frais_name' => $frais->name,
+                        'frais_description' => $frais->description,
+                        'frais_montant' => $frais->montant
                     ];
                     return $data;
                 })
             ];
             return $data;
         });
+
+        //dd($donnees);
+
         $numberToWords = new NumberToWords();
         $numberTransformer = $numberToWords->getNumberTransformer('fr');
         $montant_chiffre = $numberTransformer->toWords($donnees[0]['montant_total']);
-
+        $frais_chiffre = $numberTransformer->toWords($donnees[0]['frais'][0]['frais_montant']);
         //prévisualiser le PDF
         $pdf = app('dompdf.wrapper');
-        $pdf->loadView('facture.invoice',['facture' =>$data,'donnees' => $donnees, 'montant_chiffre' => $montant_chiffre]);
+        $pdf->loadView('facture.invoice',['facture' =>$data,'donnees' => $donnees, 'montant_chiffre' => $montant_chiffre, 'frais_chiffre' => $frais_chiffre]);
 
         return $pdf->stream();
     }
@@ -174,13 +188,15 @@ class FactureController extends Controller
             $data = [
                 'client' => $item->client->designation,
                 'code_postal' => $item->client->code_postal,
+                'telephone' => $item->client->phone,
+                'telephone2' => $item->client->secondary_phone,
                 'ville' => $item->client->ville->name,
                 'reference_contrat' => $item->reference_contrat,
                 'delegation' => $item->client->ville->delegation->name,
                 'abbr_delegation' => $item->client->ville->delegation->nickname,
-                'product_name' => $item->product->designation,
+                'product_name' => $item->product->name,
                 'product_description' => $item->product->description,
-                'imputation_budgetaire' => $item->product->codification,
+                'imputation_budgetaire' => $item->product->imputation_budgetaire,
                 'compte_collectif' => $item->product->compte_collectif,
                 'compte_auxilliaire' => $item->client->compte_auxilliaire,
                 'direction' => $item->product->direction->name,

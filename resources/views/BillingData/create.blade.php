@@ -22,7 +22,10 @@
                         <p class="text-2xl text-center mt-4">
                             Creation d'une donnée de facturation
                         </p>
-                        <livewire:product-select-sub-product/>
+
+                            <livewire:rarn-product/>
+
+
                     </div>
             </div>
         </div>

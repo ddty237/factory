@@ -15,35 +15,44 @@
 
                 <!-- Name -->
                 <div>
-                    <x-label for="name" :value="__('Name')" />
-
+                    <label class="block font-medium text-sm text-gray-700" for="name" :value="__('Name')">
+                        Name
+                    </label>
                     <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
                 </div>
 
                 <!-- Prenom -->
                 <div class="mt-4">
-                    <x-label for="prename" :value="__('Prenom')" />
+                    <label class="block font-medium text-sm text-gray-700" for="prename">
+                        Prenom
+                    </label>
 
                     <x-input id="prenom" class="block mt-1 w-full" type="text" name="prenom" :value="old('prenom')" required autofocus />
                 </div>
 
                 <!-- Phone number -->
                 <div class="mt-4">
-                    <x-label for="phone_number" :value="__('numéro de téléphone')" />
+                    <label class="block font-medium text-sm text-gray-700" for="phone_number">
+                        Numéro de téléphone
+                    </label>
 
                     <x-input id="phone_number" class="block mt-1 w-full" type="text" name="phone_number" :value="old('phone')" required autofocus />
                 </div>
 
                 <!-- Matricule -->
                 <div class="mt-4">
-                    <x-label for="matricule" :value="__('Matricule')" />
+                    <label class="block font-medium text-sm text-gray-700" for="matricule">
+                        Matricule
+                    </label>
 
                     <x-input id="matricule" class="block mt-1 w-full" type="text" name="matricule" :value="old('matricule')" required autofocus />
                 </div>
 
                 <!-- Direction -->
                 <div class="mt-4">
-                    <x-label for="direction" :value="__('Direction')" />
+                    <label class="block font-medium text-sm text-gray-700" for="direction">
+                        Direction
+                    </label>
                     <select class="rounded-md shadow-sm w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="direction">
                       @foreach ($directions as $direction)
                           <option value={{$direction->id}}>{{$direction->name}}</option>
@@ -58,7 +67,9 @@
 
                 <!-- Poste -->
                 <div class="mt-4">
-                    <x-label for="poste" :value="__('Poste')" />
+                    <label class="block font-medium text-sm text-gray-700" for="poste">
+                        Poste
+                    </label>
                     <select class="rounded-md shadow-sm w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="poste">
                       @foreach ($postes as $poste)
                           <option value={{$poste->id}}>{{$poste->name}}</option>
@@ -73,14 +84,18 @@
 
                 <!-- Email Address -->
                 <div class="mt-4">
-                    <x-label for="email" :value="__('Email')" />
+                    <label class="block font-medium text-sm text-gray-700" for="email">
+                        Email
+                    </label>
 
                     <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
                 </div>
 
                 <!-- Password -->
                 <div class="mt-4">
-                    <x-label for="password" :value="__('Password')" />
+                    <label class="block font-medium text-sm text-gray-700" for="password">
+                        Password
+                    </label>
 
                     <x-input id="password" class="block mt-1 w-full"
                                     type="password"
@@ -90,7 +105,9 @@
 
                 <!-- Confirm Password -->
                 <div class="mt-4">
-                    <x-label for="password_confirmation" :value="__('Confirm Password')" />
+                    <label class="block font-medium text-sm text-gray-700" for="password_confirmation">
+                        Confirm Password
+                    </label>
 
                     <x-input id="password_confirmation" class="block mt-1 w-full"
                                     type="password"
@@ -102,9 +119,9 @@
                         {{ __('Already registered?') }}
                     </a>
 
-                    <x-button class="ml-4">
+                    <button class="text-white px-4 py-2 bg-gray-900 rounded-lg ml-4">
                         {{ __('Register') }}
-                    </x-button>
+                    </button>
                 </div>
             </form>
         </x-auth-card>

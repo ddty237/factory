@@ -23,6 +23,19 @@
                         Reporting des clients
                     </p>
 
+                    <div class="flex items-center justify-end px-20 py-5">
+                        <x-button class="ml-4 bg-indigo-600 text-white">
+                            <a href="{{ route('client.import') }}">
+                                {{ __('Import') }}
+                            </a>
+                        </x-button>
+                        <x-button class="ml-4">
+                            <a href="{{ route('client.export') }}">
+                                {{ __('Export') }}
+                            </a>
+                        </x-button>
+                    </div>
+
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                           <tr>

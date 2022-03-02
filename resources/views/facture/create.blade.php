@@ -6,8 +6,8 @@
             </h2>
             <div class="flex items-center justify-end px-20">
                 <x-button class="ml-4">
-                    <a href="{{ route('billingData.create') }}">
-                        {{ __('Create Data billing') }}
+                    <a href="{{ route('facture.index') }}">
+                        {{ __('Back to reporting') }}
                     </a>
                 </x-button>
             </div>
@@ -55,7 +55,7 @@
                               </td>
                               <td class="px-6 py-4 text-center whitespace-nowrap">
                                 <div class="text-sm text-gray-900">
-                                  {{ $data->product->designation }}
+                                  RARN
                                 </div>
                               </td>
                               <td class="px-6 py-3 text-center whitespace-nowrap">
@@ -72,7 +72,7 @@
                             </tr>
                           @endforeach
                         </tbody>
-                      </table>
+                    </table>
             </div>
         </div>
     </div>

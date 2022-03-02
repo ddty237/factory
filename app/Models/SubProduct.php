@@ -23,3 +23,4 @@ class SubProduct extends Model
         return $this->belongsTo(Facture::class);
     }
 }
+

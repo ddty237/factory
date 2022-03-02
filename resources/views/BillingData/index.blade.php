@@ -50,30 +50,30 @@
                               <td class="px-6 py-4 text-center whitespace-nowrap">
                                 <div class="flex items-center">
                                   <div class="text-sm font-medium text-gray-900">
-                                      <a class='text-indigo-700' href="{{route('billingData.show',['billingDatum' => $data->id])}}">
-                                        {{ $data->client->designation }}
+                                      <a class='text-indigo-700' href="{{route('billingData.show',['billingDatum' => $data['id']])}}">
+                                        {{ $data['client'] }}
                                       </a>
                                   </div>
                                 </div>
                               </td>
                               <td class="px-6 py-4 text-center whitespace-nowrap">
                                 <div class="text-sm text-gray-900">
-                                  {{ $data->product->designation }}
+                                  {{ $data['produit'] }}
                                 </div>
                               </td>
                               <td class="px-6 py-3 text-center whitespace-nowrap">
                                 <div class="text-sm text-gray-900">
-                                  {{ $data->client->ville->delegation->name }}
+                                  {{ $data['delegation'] }}
                                 </div>
                               </td>
                               <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
-                                  {{ $data->montant_facture }}
+                                  {{ $data['montant'] }}
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="{{route('data.createFile',['dataFacturation' => $data->id])}}" class="text-indigo-600 hover:text-indigo-900">Lier des documents</a>
+                                <a href="{{route('data.createFile',['dataFacturation' => $data['id']])}}" class="text-indigo-600 hover:text-indigo-900">Lier des documents</a>
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                  <a href="{{route('billingData.edit',['billingDatum' => $data['id']])}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                               </td>
                             </tr>
                           @endforeach
